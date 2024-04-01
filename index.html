@@ -1,0 +1,852 @@
+<!-- 
+云小编工作台导航页：
+创建者: 惊雷终结者@https://music.163.com/#/user/home?id=125041659
+创建时间：2024-4-1
+版本：0.1
+联系邮箱：550849948@qq.com
+-->
+
+<!DOCTYPE html>
+<html lang="zh">
+<link rel="shortcut icon" href="favicon.ico" />
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?7d0b4d1a3d993aa9e9bcf806dca6b5da";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>云小编工作台导航系统</title>
+    <style>
+        menu,
+        .menu {
+            width: 100%;
+            height: 80px;
+            display: flex;
+            background: #333;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-sizing: border-box;
+            z-index: 3;
+        }
+        
+        .menu .website_name {
+            color: #1890ff;
+            font-weight: 600;
+            font-size: 25px;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border-radius: 2px;
+            opacity: 0.5;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .menu .website_name:hover {
+            opacity: 1;
+        }
+        
+        .menu .website_name img {
+            vertical-align: middle;
+            margin-right: 1px;
+        }
+        
+        .menu .menu_links {
+            font-size: 20px;
+            transition: all 0.4s ease;
+            opacity: 0.5;
+        }
+        
+        .menu .menu_links:hover {
+            opacity: 1;
+        }
+        
+        @media screen and (max-width: 799px) {
+            .menu .menu_links {
+                display: none;
+            }
+        }
+        
+        .menu .menu_links .link {
+            color: #1890ff;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-left: 50px;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s 0.2s ease;
+        }
+        
+        .menu .menu_links .link:last-child {
+            margin-right: 0;
+        }
+        
+        .menu .menu_links .link:before {
+            content: '';
+            position: absolute;
+            width: 0px;
+            height: 4px;
+            background: linear-gradient(270deg, #95ccff 0%, #1890ff 100%);
+            bottom: -10px;
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.82, 0.02, 0.13, 1.26);
+            right: 100%;
+        }
+        
+        .menu .menu_links .link:hover {
+            opacity: 1;
+            color: #FB8A8A;
+        }
+        
+        .menu .menu_links .link:hover:before {
+            width: 100%;
+            right: 0;
+        }
+        
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #F7F7F7;
+        }
+        
+        .container {
+            background-color: #fff;
+        }
+        
+        .container-header {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            height: 40px;
+            padding-left: 10px;
+            background-color: #EFF7FF
+        }
+        
+        .container-body {
+            display: flex;
+            border-top: 1px solid #dfdfdf;
+            padding: 20px 10px 0 10px;
+            /*justify-content: space-between;*/
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .container div {
+            display: flex;
+        }
+        
+        .item-block {
+            border: 1px solid #dfdfdf;
+            flex-direction: column;
+            height: 160px;
+            width: 24%;
+            margin-bottom: 20px;
+            margin-right: 10px;
+        }
+        
+        a:link {
+            /* 超链接正常状态下的样式 */
+            color: #000000;
+            /* 黑色 */
+            text-decoration: none;
+            /* 无下划线 */
+        }
+        
+        a:visited {
+            /* 访问过的超链接 */
+            color: #000000;
+            /* 黑色 */
+            text-decoration: none;
+            /* 无下划线 */
+        }
+        
+        .item-top {
+            height: 80px;
+            padding: 20px;
+        }
+        
+        .item-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+        }
+        
+        .item-logo img {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .item-logo-society {
+            width: 155px;
+            height: 45px;
+            margin-right: 20px;
+        }
+        
+        .item-body {
+            flex-direction: column;
+            width: 79%;
+        }
+        
+        .item-bottom {
+            height: 40px;
+            justify-content: space-around;
+            align-items: center;
+            color: #888888;
+            background-color: #F7F7F7;
+            font-size: 13px;
+        }
+        
+        .item-bottom .link:hover {
+            opacity: 1;
+            color: #1890ff;
+        }
+        
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+        
+        .notice {
+            font-size: 12px;
+            color: #888;
+        }
+        
+        .divider {
+            height: 20px;
+            width: 1px;
+            background-color: #dfdfdf;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <p class="website_name"><sub><img src="img/logo.png" width="60" height="60">云小编工作台导航系统</sub></p>
+        <div class="menu_links">
+            <a href="https://music.163.com/" target="_blank" class="link">网易云音乐</a>
+            <a href="https://music.163.com/#/wiki/task-center/m/st/wiki/task-center/recommend" target="_blank" class="link">云小编任务中心</a>
+            <a href="https://music.163.com/#/wiki/contribution" target="_blank" class="link">我的曲库贡献</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-header">云小编Wiki/百科系统</div>
+        <div class="container-body">
+            <div class="item-block">
+                <a href="https://music.163.com/#/wiki/contribution" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/ugc.png"></div>
+                        <div class="item-body">
+                            <span class="title">我的曲库贡献</span>
+                            <span class="notice">曲库纠错/补充提交记录</span>
+                            <span class="notice">浏览器/移动端在登录网易云音乐账号的状态下可直接访问</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://music.163.com/#/wiki/contribution" target="_blank" class="link">
+                        <div>网页端</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="orpheus://activity?url=https%3A%2F%2Fmusic.163.com%2Fst%2Fcrowdsourcing%2Fhome" class="link">
+                        <div>移动端</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://music.163.com/st/platform/qiyu?scope=musiclibrary&biz=" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/csm.png"></div>
+                        <div class="item-body">
+                            <span class="title">传送门</span>
+                            <span class="notice">曲库问题咨询传送门</span>
+                            <span class="notice">浏览器/移动端在登录网易云音乐账号的状态下才可收到回复</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://music.163.com/st/platform/qiyu?scope=musiclibrary&biz=" target="_blank" class="link">
+                        <div>网页端</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="orpheus://activity?url=https%3A%2F%2Fmusic.163.com%2Fst%2Fplatform%2Fqiyu%3Fscope%3Dmusiclibrary%26biz%3D" class="link">
+                        <div>移动端</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://qm.qq.com/cgi-bin/qm/qr?k=_779xUXa-qefxAwSoSNCkKFTAjg_lvKa&jump_from=webapi&authKey=g5t0a1425TpAJsXZNzclD04YIcn+89kF+hqtGfoFSHa6/s0yuNTVqRRBPuzg3AJZ" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/qqq.png"></div>
+                        <div class="item-body">
+                            <span class="title">云小编社群</span>
+                            <span class="notice">加入云小编社群与大家一起交流共建经验</span>
+                            <span class="notice">验证信息需填写云村昵称,管理员审核后方可加入</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://qm.qq.com/cgi-bin/qm/qr?k=_779xUXa-qefxAwSoSNCkKFTAjg_lvKa&jump_from=webapi&authKey=g5t0a1425TpAJsXZNzclD04YIcn+89kF+hqtGfoFSHa6/s0yuNTVqRRBPuzg3AJZ" target="_blank" class="link">
+                        <div>点击加入</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="img/qqq.png" target="_blank" class="link">
+                        <div>二维码</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+    <div class="container ">
+        <div class="container-header ">编辑部贴士</div>
+        <div class="container-body ">
+            <div class="item-block ">
+                <a href="https://music.163.com/#/series?id=6518131" target="_blank ">
+                    <div class="item-top ">
+                        <div class="item-logo "><img src="img/qkj.png"></div>
+                        <div class="item-body ">
+                            <span class="title ">曲库Wiki指南</span>
+                            <span class="notice ">曲库自助编辑系统的使用方法介绍</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom ">
+                    <a href="https://music.163.com/#/user/home?id=2608402" target="_blank " class="link ">
+                        <div>云音乐曲库</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/series?id=6518131" target="_blank " class="link ">
+                        <div>曲库Wiki指南</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block ">
+                <a href="https://music.163.com/#/series?id=6614122" target="_blank ">
+                    <div class="item-top ">
+                        <div class="item-logo "><img src="img/xxm.png"></div>
+                        <div class="item-body ">
+                            <span class="title ">学妹小课堂</span>
+                            <span class="notice ">歌词/翻译的上传及审核规则</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom ">
+                    <a href="https://music.163.com/#/user/home?id=79248480" target="_blank " class="link ">
+                        <div>曲库小学妹</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/topic?id=53230630" target="_blank " class="link ">
+                        <div>歌词及翻译上传规则</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/topic?id=53422551" target="_blank " class="link ">
+                        <div>歌词及翻译审核规则</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block ">
+                <a href="https://music.163.com/#/user/home?id=551291326" target="_blank ">
+                    <div class="item-top ">
+                        <div class="item-logo "><img src="img/gwt.png "></div>
+                        <div class="item-body ">
+                            <span class="title ">云村顾问团</span>
+                            <span class="notice ">顾问小课堂及议事厅章程</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom ">
+                    <a href="https://music.163.com/#/series?id=6606117" target="_blank " class="link ">
+                        <div>顾问小课堂</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/series?id=2885068" target="_blank " class="link ">
+                        <div>议事厅章程</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/series?id=2874115" target="_blank " class="link ">
+                        <div>原唱鉴别指南</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block ">
+                <a href="https://music.163.com/#/series?id=9115940" target="_blank ">
+                    <div class="item-top ">
+                        <div class="item-logo "><img src="img/jl.png"></div>
+                        <div class="item-body ">
+                            <span class="title ">歌曲创作信息指南</span>
+                            <span class="notice ">[Wiki/百科]歌曲创作信息纠错/完善科普及规范化指南</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom ">
+                    <a href="https://music.163.com/#/user/home?id=125041659" target="_blank " class="link ">
+                        <div>惊雷终结者</div>
+                    </a>
+                    <div class="divider "></div>
+                    <a href="https://music.163.com/#/topic?id=53323588" target="_blank " class="link ">
+                        <div>歌曲创作信息纠错/完善科普指南</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container-header">常用工具</div>
+        <div class="container-body">
+            <div class="item-block">
+                <a href="https://lrc-maker.github.io" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/gdj.png"></div>
+                        <div class="item-body">
+                            <span class="title">灯里的歌词滚动姬</span>
+                            <span class="notice">跨平台歌词制作工具</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://lrc-maker.github.io" target="_blank" class="link">
+                        <div>制作入口</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://lrc-maker.github.io/lrc-utils/" class="link">
+                        <div>LRC工具</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <div class="item-top">
+                    <div class="item-logo"><img src="img/ugc.png"></div>
+                    <div class="item-body">
+                        <span class="title">歌曲编辑页面直达</span>
+                        <span class="notice">在输入框内输入歌曲数字ID即可直接进入歌曲编辑页面</span>
+                    </div>
+                </div>
+                </a>
+                <div class="item-bottom">
+                    <script>
+                        function createSongLink() {
+                            var songbaseURL = "https://music.163.com/#/wiki/song?songId=";
+                            var songuserInput = document.getElementById("songuserInput").value;
+                            var songfullURL = songbaseURL + encodeURIComponent(songuserInput);
+                            document.getElementById("songLink").href = songfullURL;
+                        }
+                    </script>
+                    <label for="songuserInput">输入歌曲数字ID:</label>
+                    <input type="text" inputmode="numeric" id="songuserInput" onchange="createSongLink()">
+                    <a id="songLink" href="" target="_blank" class="link">进入歌曲编辑页面</a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <div class="item-top">
+                    <div class="item-logo"><img src="img/ugc.png"></div>
+                    <div class="item-body">
+                        <span class="title">专辑编辑页面直达</span>
+                        <span class="notice">在输入框内输入专辑数字ID即可直接进入专辑编辑页面</span>
+                    </div>
+                </div>
+                </a>
+                <div class="item-bottom">
+                    <script>
+                        function createAlbumLink() {
+                            var albumbaseURL = "https://music.163.com/#/wiki/album?albumId=";
+                            var albumuserInput = document.getElementById("albumuserInput").value;
+                            var albumfullURL = albumbaseURL + encodeURIComponent(albumuserInput);
+                            document.getElementById("albumLink").href = albumfullURL;
+                        }
+                    </script>
+                    <label for="albumuserInput">输入专辑数字ID:</label>
+                    <input type="text" inputmode="numeric" id="albumuserInput" onchange="createAlbumLink()">
+                    <a id="albumLink" href="" target="_blank" class="link">进入专辑编辑页面</a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <div class="item-top">
+                    <div class="item-logo"><img src="img/ugc.png"></div>
+                    <div class="item-body">
+                        <span class="title">艺人编辑页面直达</span>
+                        <span class="notice">在输入框内输入艺人数字ID即可直接进入艺人编辑页面</span>
+                    </div>
+                </div>
+                </a>
+                <div class="item-bottom">
+                    <script>
+                        function createArtistLink() {
+                            var artistbaseURL = "https://music.163.com/#/wiki/artist?artistId=";
+                            var artistuserInput = document.getElementById("artistuserInput").value;
+                            var artistfullURL = artistbaseURL + encodeURIComponent(artistuserInput);
+                            document.getElementById("artistLink").href = artistfullURL;
+                        }
+                    </script>
+                    <label for="artistuserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="artistuserInput" onchange="createArtistLink()">
+                    <a id="artistLink" href="" target="_blank" class="link">进入艺人编辑页面</a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <div class="item-top">
+                    <div class="item-logo"><img src="img/ugc.png"></div>
+                    <div class="item-body">
+                        <span class="title">艺人补充专辑页面直达</span>
+                        <span class="notice">在输入框内输入艺人数字ID即可直接进入艺人补充专辑页面</span>
+                    </div>
+                </div>
+                </a>
+                <div class="item-bottom">
+                    <script>
+                        function createAddalbumLink() {
+                            var addalbumbaseURL = "https://music.163.com/#/wiki/add-album?artistId=";
+                            var addalbumuserInput = document.getElementById("addalbumuserInput").value;
+                            var addalbumfullURL = addalbumbaseURL + encodeURIComponent(addalbumuserInput);
+                            document.getElementById("addalbumLink").href = addalbumfullURL;
+                        }
+                    </script>
+                    <label for="addalbumuserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="addalbumuserInput" onchange="createAddalbumLink()">
+                    <a id="addalbumLink" href="" target="_blank" class="link">进入艺人补充专辑页面</a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <div class="item-top">
+                    <div class="item-logo"><img src="img/ugc.png"></div>
+                    <div class="item-body">
+                        <span class="title">重复艺人报错页面直达</span>
+                        <span class="notice">在输入框内输入艺人数字ID即可直接进入重复艺人报错页面</span>
+                    </div>
+                </div>
+                </a>
+                <div class="item-bottom">
+                    <script>
+                        function createArtistrepeatLink() {
+                            var artistrepeatbaseURL = "https://music.163.com/#/wiki/artist-repeat-error?artistId=";
+                            var artistrepeatuserInput = document.getElementById("artistrepeatuserInput").value;
+                            var artistrepeatfullURL = artistrepeatbaseURL + encodeURIComponent(artistrepeatuserInput);
+                            document.getElementById("artistrepeatLink").href = artistrepeatfullURL;
+                        }
+                    </script>
+                    <label for="artistrepeatuserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="artistrepeatuserInput" onchange="createArtistrepeatLink()">
+                    <a id="artistrepeatLink" href="" target="_blank" class="link">进入重复艺人报错页面</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="container-header">音乐著作信息查询</div>
+        <div class="container-body">
+            <div class="item-block">
+                <a href="https://iswcnet.cisac.org/search" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/CISAC.svg"></div>
+                        <div class="item-body">
+                            <span class="title">CISAC-ISWC</span>
+                            <span class="notice">ISWC(国际标准音乐作品代码)查询</span>
+                            <span class="notice">ISWC(国际标准音乐作品代码)是唯一的、永久的、国际公认的音乐作品识别参考号。</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.cisac.org/" target="_blank" class="link">
+                        <div>CISAC(国际作家和作曲家协会联合会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://iswcnet.cisac.org/search" target="_blank" class="link">
+                        <div>ISWC(国际标准音乐作品代码)</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.mcsc.com.cn/publicity/publicity.html" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/MCSC.png"></div>
+                        <div class="item-body">
+                            <span class="title">MCSC(中国音乐著作权协会)</span>
+                            <span class="notice">国语歌曲著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.mcsc.com.cn/" target="_blank" class="link">
+                        <div>MCSC(中国音乐著作权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.mcsc.com.cn/publicity/publicity.html" target="_blank" class="link">
+                        <div>MCSC著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.cash.org.hk/song-search/?q=&pageno=&lang=zh-hant" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/CASH.png"></div>
+                        <div class="item-body">
+                            <span class="title">CASH(香港作词及作曲家协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.cash.org.hk/" target="_blank" class="link">
+                        <div>CASH(香港作词及作曲家协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.cash.org.hk/song-search/?q=&pageno=&lang=zh-hant" target="_blank" class="link">
+                        <div>CASH著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.must.org.tw/tw/chinese_musical/index.aspx" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo-society"><img src="img/MUST.png"></div>
+                        <div class="item-body">
+                            <span class="title">MÜST(台湾中华音乐著作权协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.must.org.tw/" target="_blank" class="link">
+                        <div>MÜST(台湾中华音乐著作权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.must.org.tw/tw/chinese_musical/index.aspx" target="_blank" class="link">
+                        <div>MÜST著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://macp.com.my/work-search/" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/MACP.png"></div>
+                        <div class="item-body">
+                            <span class="title">MACP(马来西亚音乐创作人版权保护协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://macp.com.my/" target="_blank" class="link">
+                        <div>MACP(马来西亚音乐创作人版权保护协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://macp.com.my/work-search/" target="_blank" class="link">
+                        <div>MACP著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.ascap.com/repertory/" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/ASCAP.png"></div>
+                        <div class="item-body">
+                            <span class="title">ASCAP(美国词曲作家和出版商协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.ascap.com/" target="_blank" class="link">
+                        <div>ASCAP(美国词曲作家和出版商协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.ascap.com/repertory/" target="_blank" class="link">
+                        <div>ASCAP著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://repertoire.bmi.com/" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/BMI.png"></div>
+                        <div class="item-body">
+                            <span class="title">BMI(美国广播音乐公司)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.bmi.com/" target="_blank" class="link">
+                        <div>BMI(美国广播音乐公司)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://repertoire.bmi.com/" target="_blank" class="link">
+                        <div>BMI著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www2.jasrac.or.jp/eJwid/" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/JASRAC.svg"></div>
+                        <div class="item-body">
+                            <span class="title">JASRAC(日本音乐著作权协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.jasrac.or.jp/" target="_blank" class="link">
+                        <div>JASRAC(日本音乐著作权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www2.jasrac.or.jp/eJwid/" target="_blank" class="link">
+                        <div>JASRAC著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.komca.or.kr/foreign2/chi/S01.jsp" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/KOMCA.png"></div>
+                        <div class="item-body">
+                            <span class="title">KOMCA(韩国音乐著作权协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.komca.or.kr/" target="_blank" class="link">
+                        <div>KOMCA(韩国音乐著作权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.komca.or.kr/foreign2/chi/S01.jsp" target="_blank" class="link">
+                        <div>KOMCA著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.mct.in.th/search_song.php" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo-society"><img src="img/MCT.png"></div>
+                        <div class="item-body">
+                            <span class="title">MCT〔音乐版权(泰国)有限公司〕</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.mct.in.th/" target="_blank" class="link">
+                        <div>MCT〔音乐版权(泰国)有限公司〕</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.mct.in.th/search_song.php" target="_blank" class="link">
+                        <div>MCT著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://online.gema.de/werke/search.faces?lang=en" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/GEMA.png"></div>
+                        <div class="item-body">
+                            <span class="title">GEMA(德国音乐演出和作品机械复制权协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.gema.de/" target="_blank" class="link">
+                        <div>GEMA(德国音乐演出和作品机械复制权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://online.gema.de/werke/search.faces?lang=en" target="_blank" class="link">
+                        <div>GEMA著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://www.apraamcos.com.au/works-search" target="_blank" class="link" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/APRA AMCOS.png"></div>
+                        <div class="item-body">
+                            <span class="title">APRA AMCOS(澳大利亚表演权协会和版权所有者协会)</span>
+                            <span class="notice">音乐著作信息查询</span>
+                            <span class="notice">国际作者和作曲者协会联合会(CISAC)会员单位</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.apraamcos.com.au/" target="_blank" class="link">
+                        <div>APRA AMCOS(澳大利亚表演权和版权协会)</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.apraamcos.com.au/works-search" target="_blank" class="link">
+                        <div>APRA AMCOS著作信息查询</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="item-block">
+                <a href="https://members.cisac.org/CisacPortal/annuaire.do?method=membersDirectoryList&by=society" target="_blank">
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/CISAC.svg"></div>
+                        <div class="item-body">
+                            <span class="title">更多海外(CISAC)会员单位</span>
+                            <span class="notice">更多海外(CISAC)会员单位查询</span>
+                            <span class="notice">国际作者与作曲者协会联合会（ CISAC）成立于1926年，是一个非政府、非营利性的国际组织。是全球规模最大的著作权集体管理组织联合体。</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="item-bottom">
+                    <a href="https://www.mcsc.com.cn/about/overseas.html" target="_blank" class="link">
+                        <div>MCSC更多海外协会</div>
+                    </a>
+                    <div class="divider"></div>
+                    <a href="https://www.cash.org.hk/about-cash/#affiliated-societies" target="_blank" class="link">
+                        <div>CASH更多海外协会</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
