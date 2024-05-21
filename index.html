@@ -2,7 +2,7 @@
 云小编工作台导航页：
 创建者: 惊雷终结者@https://music.163.com/#/user/home?id=125041659
 创建时间：2024-4-1
-版本：0.1
+当前版本：0.2.24.05.21.0
 联系邮箱：550849948@qq.com
 -->
 
@@ -14,266 +14,19 @@
     <title>云小编工作台导航系统</title>
     <meta name="keywords" content="云小编工作台,网易云音乐,音乐百科,曲库Wiki,曲库编辑部,音乐著作信息查询,导航系统" />
     <meta name="description" content="云小编工作台导航系统是集成网易云音乐云小编常用功能入口及工具的工作台，为云小编提供便捷快速的查询及提交功能。" />
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="shortcut icon" href="favicon.ico?v20240521" />
+    <link rel="stylesheet" href="css/main.css?v20240521" />
+    <script src="js/main.js?v20240521"></script>
+    <script src="js/analytics.js?v20240521" async></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit" />
     <base target="_blank">
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?7d0b4d1a3d993aa9e9bcf806dca6b5da";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-    <script>
-        ! function(p) {
-            "use strict";
-            ! function(t) {
-                var s = window,
-                    e = document,
-                    i = p,
-                    c = "".concat("https:" === e.location.protocol ? "https://" : "http://", "sdk.51.la/js-sdk-pro.min.js"),
-                    n = e.createElement("script"),
-                    r = e.getElementsByTagName("script")[0];
-                n.type = "text/javascript", n.setAttribute("charset", "UTF-8"), n.async = !0, n.src = c, n.id = "LA_COLLECT", i.d = n;
-                var o = function() {
-                    s.LA.ids.push(i)
-                };
-                s.LA ? s.LA.ids && o() : (s.LA = p, s.LA.ids = [], o()), r.parentNode.insertBefore(n, r)
-            }()
-        }({
-            id: "3II91MJpNxV9UzxW",
-            ck: "3II91MJpNxV9UzxW",
-            autoTrack: true
-        });
-    </script>
-
-    <style>
-        menu,
-        .menu {
-            width: 100%;
-            height: 80px;
-            display: flex;
-            background: #242424;
-            border-bottom: 1px solid #000;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            box-sizing: border-box;
-            z-index: 3;
-        }
-        
-        .menu .website_name {
-            color: #1890ff;
-            font-weight: 600;
-            font-size: 21px;
-            letter-spacing: 1px;
-            padding: 4px 8px;
-            border-radius: 2px;
-            opacity: 0.5;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-        
-        .menu .website_name:hover {
-            opacity: 1;
-        }
-        
-        .menu .website_name img {
-            vertical-align: -21px;
-            margin-right: 1px;
-        }
-        
-        .menu .menu_links {
-            font-size: 20px;
-            transition: all 0.4s ease;
-            opacity: 0.5;
-        }
-        
-        .menu .menu_links:hover {
-            opacity: 1;
-        }
-        
-        @media screen and (max-width: 799px) {
-            .menu .menu_links {
-                display: none;
-            }
-        }
-        
-        .menu .menu_links .link {
-            color: #1890ff;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-left: 50px;
-            letter-spacing: 2px;
-            position: relative;
-            transition: all 0.3s 0.2s ease;
-        }
-        
-        .menu .menu_links .link:last-child {
-            margin-right: 0;
-        }
-        
-        .menu .menu_links .link:before {
-            content: '';
-            position: absolute;
-            width: 0px;
-            height: 4px;
-            background: linear-gradient(270deg, #95ccff 0%, #1890ff 100%);
-            bottom: -10px;
-            border-radius: 4px;
-            transition: all 0.4s cubic-bezier(0.82, 0.02, 0.13, 1.26);
-            right: 0%;
-        }
-        
-        .menu .menu_links .link:hover {
-            opacity: 1;
-            color: #FB8A8A;
-        }
-        
-        .menu .menu_links .link:hover:before {
-            width: 100%;
-            left: 0;
-        }
-        
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #F7F7F7;
-        }
-        
-        .container {
-            background-color: #fff;
-        }
-        
-        .container-header {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            font-weight: bold;
-            height: 40px;
-            padding-left: 10px;
-            background-color: #EFF7FF
-        }
-        
-        .container-body {
-            display: flex;
-            border-top: 1px solid #dfdfdf;
-            padding: 20px 10px 0 10px;
-            /*justify-content: space-between;*/
-            flex-direction: row;
-            flex-wrap: wrap;
-        }
-        
-        .container div {
-            display: flex;
-        }
-        
-        .item-block {
-            border: 1px solid #dfdfdf;
-            flex-direction: column;
-            height: 160px;
-            width: 452px;
-            margin-bottom: 20px;
-            margin-right: 10px;
-        }
-        
-        a:link {
-            /* 超链接正常状态下的样式 */
-            color: #000000;
-            /* 黑色 */
-            text-decoration: none;
-            /* 无下划线 */
-        }
-        
-        a:visited {
-            /* 访问过的超链接 */
-            color: #000000;
-            /* 黑色 */
-            text-decoration: none;
-            /* 无下划线 */
-        }
-        
-        .item-top {
-            height: 80px;
-            padding: 20px;
-        }
-        
-        .item-logo {
-            width: 60px;
-            height: 60px;
-            margin-right: 20px;
-        }
-        
-        .item-logo img {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .item-logo-society {
-            height: 45px;
-            margin-right: 20px;
-        }
-        
-        .item-logo-society img {
-            height: 100%;
-        }
-        
-        .item-logo-society-w {
-            width: 120px;
-            margin-right: 20px;
-        }
-        
-        .item-body {
-            flex-direction: column;
-            width: 79%;
-        }
-        
-        .item-bottom {
-            height: 40px;
-            justify-content: space-around;
-            align-items: center;
-            color: #888888;
-            background-color: #F7F7F7;
-            font-size: 13px;
-        }
-        
-        .item-bottom .link:hover {
-            opacity: 1;
-            color: #1890ff;
-        }
-        
-        .item-bottom .shuziid {
-            color: #000000;
-        }
-        
-        .title {
-            font-size: 16px;
-            font-weight: bold;
-            padding-bottom: 10px;
-        }
-        
-        .notice {
-            font-size: 12px;
-            color: #888;
-        }
-        
-        .divider {
-            height: 20px;
-            width: 1px;
-            background-color: #dfdfdf;
-        }
-    </style>
 </head>
 
 <body>
     <div class="menu">
-        <p class="website_name"><img src="img/logo.png" width="60" height="60">云小编工作台导航系统</p>
+        <a href="/" target="_self" class="website_name"><img src="img/logo.png" width="60" height="60">云小编工作台导航系统</a>
         <div class="menu_links">
             <a href="https://music.163.com/" class="link">网易云音乐</a>
             <a href="https://music.163.com/#/wiki/task-center/m/st/wiki/task-center/recommend" class="link">云小编任务中心</a>
@@ -281,8 +34,23 @@
         </div>
     </div>
 
+    <!-- 菜单栏占位元素 -->
+    <div class="placeholder-menu"></div>
+
+    <div class="nav">
+        <div class="nav_links">
+            <a href="#wiki" target="_self" class="link">云小编Wiki/百科系统</a>
+            <a href="#tips" target="_self" class="link">编辑部贴士</a>
+            <a href="#tools" target="_self" class="link">常用工具</a>
+            <a href="#society" target="_self" class="link">音乐著作信息查询</a>
+        </div>
+    </div>
+
+    <!-- 导航栏占位元素 -->
+    <div class="placeholder-nav"></div>
+
     <div class="container">
-        <div class="container-header">云小编Wiki/百科系统</div>
+        <div id="wiki" class="container-header">云小编Wiki/百科系统</div>
         <div class="container-body">
             <div class="item-block">
                 <a href="https://music.163.com/#/wiki/contribution">
@@ -372,14 +140,13 @@
                 </div>
             </div>
 
-
         </div>
     </div>
 
-    <div class="container ">
-        <div class="container-header ">编辑部贴士</div>
-        <div class="container-body ">
-            <div class="item-block ">
+    <div class="container">
+        <div id="tips" class="container-header">编辑部贴士</div>
+        <div class="container-body">
+            <div class="item-block">
                 <a href="https://music.163.com/#/series?id=6518131" target="_blank ">
                     <div class="item-top ">
                         <div class="item-logo "><img src="img/qkj.png"></div>
@@ -389,18 +156,18 @@
                         </div>
                     </div>
                 </a>
-                <div class="item-bottom ">
+                <div class="item-bottom">
                     <a href="https://music.163.com/#/user/home?id=2608402" target="_blank " class="link ">
                         <div>云音乐曲库</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/series?id=6518131" target="_blank " class="link ">
                         <div>曲库Wiki指南</div>
                     </a>
                 </div>
             </div>
 
-            <div class="item-block ">
+            <div class="item-block">
                 <a href="https://music.163.com/#/series?id=6614122" target="_blank ">
                     <div class="item-top ">
                         <div class="item-logo "><img src="img/xxm.png"></div>
@@ -410,47 +177,47 @@
                         </div>
                     </div>
                 </a>
-                <div class="item-bottom ">
+                <div class="item-bottom">
                     <a href="https://music.163.com/#/user/home?id=79248480" target="_blank " class="link ">
                         <div>曲库小学妹</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/topic?id=53230630" target="_blank " class="link ">
                         <div>歌词及翻译上传规则</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/topic?id=53422551" target="_blank " class="link ">
                         <div>歌词及翻译审核规则</div>
                     </a>
                 </div>
             </div>
 
-            <div class="item-block ">
+            <div class="item-block">
                 <a href="https://music.163.com/#/user/home?id=551291326" target="_blank ">
-                    <div class="item-top ">
-                        <div class="item-logo "><img src="img/gwt.png "></div>
-                        <div class="item-body ">
-                            <span class="title ">云村顾问团</span>
-                            <span class="notice ">顾问小课堂及议事厅章程</span>
+                    <div class="item-top">
+                        <div class="item-logo"><img src="img/gwt.png "></div>
+                        <div class="item-body">
+                            <span class="title">云村顾问团</span>
+                            <span class="notice">顾问小课堂及议事厅章程</span>
                         </div>
                     </div>
                 </a>
-                <div class="item-bottom ">
+                <div class="item-bottom">
                     <a href="https://music.163.com/#/series?id=6606117" target="_blank " class="link ">
                         <div>顾问小课堂</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/series?id=2885068" target="_blank " class="link ">
                         <div>议事厅章程</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/series?id=2874115" target="_blank " class="link ">
                         <div>原唱鉴别指南</div>
                     </a>
                 </div>
             </div>
 
-            <div class="item-block ">
+            <div class="item-block">
                 <a href="https://music.163.com/#/series?id=9115940" target="_blank ">
                     <div class="item-top ">
                         <div class="item-logo "><img src="img/jl.png"></div>
@@ -460,11 +227,11 @@
                         </div>
                     </div>
                 </a>
-                <div class="item-bottom ">
+                <div class="item-bottom">
                     <a href="https://music.163.com/#/user/home?id=125041659" target="_blank " class="link ">
                         <div>惊雷终结者</div>
                     </a>
-                    <div class="divider "></div>
+                    <div class="divider"></div>
                     <a href="https://music.163.com/#/topic?id=53323588" target="_blank " class="link ">
                         <div>歌曲创作信息纠错/完善科普指南</div>
                     </a>
@@ -474,7 +241,7 @@
     </div>
 
     <div class="container">
-        <div class="container-header">常用工具</div>
+        <div id="tools" class="container-header">常用工具</div>
         <div class="container-body">
             <div class="item-block">
                 <a href="https://lrc-maker.github.io">
@@ -505,18 +272,9 @@
                         <span class="notice">在输入框内输入歌曲数字ID即可直接进入歌曲编辑页面</span>
                     </div>
                 </div>
-                </a>
                 <div class="item-bottom">
-                    <script>
-                        function createSongLink() {
-                            var songbaseURL = "https://music.163.com/#/wiki/song?songId=";
-                            var songuserInput = document.getElementById("songuserInput").value;
-                            var songfullURL = songbaseURL + encodeURIComponent(songuserInput);
-                            document.getElementById("songLink").href = songfullURL;
-                        }
-                    </script>
-                    <label class="shuziid" for="songuserInput">输入歌曲数字ID:</label>
-                    <input type="text" inputmode="numeric" id="songuserInput" onchange="createSongLink()">
+                    <label for="songUserInput">输入歌曲数字ID:</label>
+                    <input type="text" inputmode="numeric" id="songUserInput" onchange="createSongLink()" onkeydown="bindEnterKey(event, 'songUserInput', 'songLink', createSongLink)">
                     <a id="songLink" href="" class="link">进入歌曲编辑页面</a>
                 </div>
             </div>
@@ -529,18 +287,9 @@
                         <span class="notice">在输入框内输入专辑数字ID即可直接进入专辑编辑页面</span>
                     </div>
                 </div>
-                </a>
                 <div class="item-bottom">
-                    <script>
-                        function createAlbumLink() {
-                            var albumbaseURL = "https://music.163.com/#/wiki/album?albumId=";
-                            var albumuserInput = document.getElementById("albumuserInput").value;
-                            var albumfullURL = albumbaseURL + encodeURIComponent(albumuserInput);
-                            document.getElementById("albumLink").href = albumfullURL;
-                        }
-                    </script>
-                    <label class="shuziid" for="albumuserInput">输入专辑数字ID:</label>
-                    <input type="text" inputmode="numeric" id="albumuserInput" onchange="createAlbumLink()">
+                    <label for="albumUserInput">输入专辑数字ID:</label>
+                    <input type="text" inputmode="numeric" id="albumUserInput" onchange="createAlbumLink()" onkeydown="bindEnterKey(event, 'albumUserInput', 'albumLink', createAlbumLink)">
                     <a id="albumLink" href="" class="link">进入专辑编辑页面</a>
                 </div>
             </div>
@@ -553,18 +302,9 @@
                         <span class="notice">在输入框内输入艺人数字ID即可直接进入艺人编辑页面</span>
                     </div>
                 </div>
-                </a>
                 <div class="item-bottom">
-                    <script>
-                        function createArtistLink() {
-                            var artistbaseURL = "https://music.163.com/#/wiki/artist?artistId=";
-                            var artistuserInput = document.getElementById("artistuserInput").value;
-                            var artistfullURL = artistbaseURL + encodeURIComponent(artistuserInput);
-                            document.getElementById("artistLink").href = artistfullURL;
-                        }
-                    </script>
-                    <label class="shuziid" for="artistuserInput">输入艺人数字ID:</label>
-                    <input type="text" inputmode="numeric" id="artistuserInput" onchange="createArtistLink()">
+                    <label for="artistUserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="artistUserInput" onchange="createArtistLink()" onkeydown="bindEnterKey(event, 'artistUserInput', 'artistLink', createArtistLink)">
                     <a id="artistLink" href="" class="link">进入艺人编辑页面</a>
                 </div>
             </div>
@@ -577,19 +317,10 @@
                         <span class="notice">在输入框内输入艺人数字ID即可直接进入艺人补充专辑页面</span>
                     </div>
                 </div>
-                </a>
                 <div class="item-bottom">
-                    <script>
-                        function createAddalbumLink() {
-                            var addalbumbaseURL = "https://music.163.com/#/wiki/add-album?artistId=";
-                            var addalbumuserInput = document.getElementById("addalbumuserInput").value;
-                            var addalbumfullURL = addalbumbaseURL + encodeURIComponent(addalbumuserInput);
-                            document.getElementById("addalbumLink").href = addalbumfullURL;
-                        }
-                    </script>
-                    <label class="shuziid" for="addalbumuserInput">输入艺人数字ID:</label>
-                    <input type="text" inputmode="numeric" id="addalbumuserInput" onchange="createAddalbumLink()">
-                    <a id="addalbumLink" href="" class="link">进入艺人补充专辑页面</a>
+                    <label for="addAlbumUserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="addAlbumUserInput" onchange="createAddAlbumLink()" onkeydown="bindEnterKey(event, 'addAlbumUserInput', 'addAlbumLink', createAddAlbumLink)">
+                    <a id="addAlbumLink" href="" class="link">进入艺人补充专辑页面</a>
                 </div>
             </div>
 
@@ -601,19 +332,10 @@
                         <span class="notice">在输入框内输入艺人数字ID即可直接进入重复艺人报错页面</span>
                     </div>
                 </div>
-                </a>
                 <div class="item-bottom">
-                    <script>
-                        function createArtistrepeatLink() {
-                            var artistrepeatbaseURL = "https://music.163.com/#/wiki/artist-repeat-error?artistId=";
-                            var artistrepeatuserInput = document.getElementById("artistrepeatuserInput").value;
-                            var artistrepeatfullURL = artistrepeatbaseURL + encodeURIComponent(artistrepeatuserInput);
-                            document.getElementById("artistrepeatLink").href = artistrepeatfullURL;
-                        }
-                    </script>
-                    <label class="shuziid" for="artistrepeatuserInput">输入艺人数字ID:</label>
-                    <input type="text" inputmode="numeric" id="artistrepeatuserInput" onchange="createArtistrepeatLink()">
-                    <a id="artistrepeatLink" href="" class="link">进入重复艺人报错页面</a>
+                    <label for="artistRepeatUserInput">输入艺人数字ID:</label>
+                    <input type="text" inputmode="numeric" id="artistRepeatUserInput" onchange="createArtistRepeatLink()" onkeydown="bindEnterKey(event, 'artistRepeatUserInput', 'artistRepeatLink', createArtistRepeatLink)">
+                    <a id="artistRepeatLink" href="" class="link">进入重复艺人报错页面</a>
                 </div>
             </div>
         </div>
@@ -621,7 +343,7 @@
     </div>
 
     <div class="container">
-        <div class="container-header">音乐著作信息查询</div>
+        <div id="society" class="container-header">音乐著作信息查询</div>
         <div class="container-body">
             <div class="item-block">
                 <a href="https://iswcnet.cisac.org/search">
@@ -908,6 +630,21 @@
             </div>
 
         </div>
+    </div>
+
+    <div class="back-to-top">
+        <button class="back-to-top-btn" onclick="scrollToTop()">
+        <svg class="svgIcon" viewBox="0 0 384 512">
+          <path
+            d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="footer">
+        <p class="copy">惊雷终结者@曲库编辑部@网易云音乐 版权所有©2024</p>
+        <p class="browser">建议使用<a href="https://www.google.cn/intl/zh-CN/chrome/" class="link"> Chrome浏览器 </a>或 <a href="https://www.microsoft.com/zh-cn/edge?form=MA13FJ" class="link"> Edge浏览器 </a>访问</p>
     </div>
 </body>
 
