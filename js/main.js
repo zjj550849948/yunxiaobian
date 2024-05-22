@@ -3,23 +3,28 @@ function createLink(baseURL, inputElementId, linkElementId) {
     var userInput = document.getElementById(inputElementId).value;
     var fullURL = baseURL + encodeURIComponent(userInput);
     document.getElementById(linkElementId).href = fullURL;
-    window.open(fullURL);
 }
 
 // 回车进入编辑页
-function bindEnterKey(event, inputElementId, linkElementId, createFunction) {
-    if (event.key === "Enter") {
-        event.preventDefault(); // 阻止默认的回车键行为
-        createFunction();
-    }
+function bindEnterKey(inputElementId, linkElementId, createFunction) {
+    document.getElementById(inputElementId).addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 阻止默认的回车键行为
+            createFunction();
+            document.getElementById(linkElementId).target = "_blank"; // 设置链接的 target 属性为 _blank，使其在新标签页中打开
+            document.getElementById(linkElementId).click(); // 模拟点击链接
+        }
+    });
 }
 
 // 初始化绑定
-bindEnterKey("songUserInput", "songLink", createSongLink);
-bindEnterKey("albumUserInput", "albumLink", createAlbumLink);
-bindEnterKey("artistUserInput", "artistLink", createArtistLink);
-bindEnterKey("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
-bindEnterKey("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
+document.addEventListener("DOMContentLoaded", function() {
+    bindEnterKey("songUserInput", "songLink", createSongLink);
+    bindEnterKey("albumUserInput", "albumLink", createAlbumLink);
+    bindEnterKey("artistUserInput", "artistLink", createArtistLink);
+    bindEnterKey("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
+    bindEnterKey("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
+});
 
 // 歌曲编辑页面直达
 function createSongLink() {
@@ -85,11 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 检查 URL 中是否包含 hash，并滚动到相应位置
-    var hash = window.location.hash;
-    if (hash) {
-        var targetId = hash.slice(1);
-        scrollToElement(targetId);
-    }
+    window.onload = function() {
+        var hash = window.location.hash;
+        if (hash) {
+            var targetId = hash.slice(1);
+            scrollToElement(targetId);
+        }
+    };
+
 
     // 找到所有的跳转链接并添加点击事件监听器
     var links = document.querySelectorAll('a[href^="#"]');
@@ -136,13 +144,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-
-    // 延迟执行滚动到锚点位置的操作，以确保修正值已经被计算
-    setTimeout(function() {
-        var hash = window.location.hash;
-        if (hash) {
-            var targetId = hash.slice(1);
-            scrollToElement(targetId);
-        }
-    }, 100);
 });
