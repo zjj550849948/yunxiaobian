@@ -133,6 +133,33 @@ menu,
 }
 
 
+/* 顶部公告 */
+
+.top-notice,
+.top-notice {
+    width: 100%;
+    height: 50px;
+    background-color: #F7F7F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 115px;
+}
+
+.top-notice img {
+    margin-right: 5px;
+}
+
+.top-notice .notice {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+}
+
+
 /* 主体内容 */
 
 html,
@@ -156,6 +183,13 @@ body {
 
 .placeholder-nav {
     height: 35px;
+}
+
+
+/* top-notice占位符 */
+
+.placeholder-top-notice {
+    height: 50px;
 }
 
 .container {

@@ -68,12 +68,13 @@ function scrollToTop() {
 }
 
 // 导航栏跳转修正
-document.addEventListener('DOMContentLoaded', function() {
-    // 获取导航栏和菜单的高度
+window.onload = function() {
+    // 获取导航栏和菜单及公告的高度
     var navHeight = document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0;
     var menuHeight = document.querySelector('.menu') ? document.querySelector('.menu').offsetHeight : 0;
+    var topnoticeHeight = document.querySelector('.top-notice') ? document.querySelector('.top-notice').offsetHeight : 0;
     // 计算修正值
-    var correction = navHeight + menuHeight;
+    var correction = navHeight + menuHeight + topnoticeHeight;
 
     // 处理跳转事件
     function scrollToElement(elementId) {
@@ -90,13 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 检查 URL 中是否包含 hash，并滚动到相应位置
-    window.onload = function() {
-        var hash = window.location.hash;
-        if (hash) {
-            var targetId = hash.slice(1);
-            scrollToElement(targetId);
-        }
-    };
+    var hash = window.location.hash;
+    if (hash) {
+        var targetId = hash.slice(1);
+        scrollToElement(targetId);
+    }
 
 
     // 找到所有的跳转链接并添加点击事件监听器
@@ -144,4 +143,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-});
+};
