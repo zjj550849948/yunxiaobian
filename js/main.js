@@ -72,9 +72,9 @@ window.onload = function() {
     // 获取导航栏和菜单及公告的高度
     var navHeight = document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0;
     var menuHeight = document.querySelector('.menu') ? document.querySelector('.menu').offsetHeight : 0;
-    var topnoticeHeight = document.querySelector('.top-notice') ? document.querySelector('.top-notice').offsetHeight : 0;
+    var topNoticeHeight = document.querySelector('.top-notice') ? document.querySelector('.top-notice').offsetHeight : 0;
     // 计算修正值
-    var correction = navHeight + menuHeight + topnoticeHeight;
+    var correction = navHeight + menuHeight + topNoticeHeight;
 
     // 处理跳转事件
     function scrollToElement(elementId) {

@@ -19,7 +19,7 @@ menu,
 .menu .website_name {
     color: #1890ff;
     font-weight: 600;
-    font-size: 21px;
+    font-size: 23px;
     letter-spacing: 1px;
     padding: 4px 8px;
     border-radius: 2px;
@@ -271,6 +271,12 @@ a:visited {
 
 .item-logo-society-w {
     width: 120px;
+    margin-right: 20px;
+}
+
+.item-logo-society-wh {
+    height: 55px;
+    width: 105px;
     margin-right: 20px;
 }
 
