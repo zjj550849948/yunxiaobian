@@ -144,3 +144,73 @@ window.onload = function() {
         }
     });
 };
+
+// 加载审核进度数据
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取页面中的元素
+    const jsonList = document.getElementById('audit-status');
+    const loadingMessage = document.getElementById('loading-message');
+
+    // 检查元素是否成功获取
+    if (jsonList && loadingMessage) {
+        // 显示加载中的消息
+        loadingMessage.textContent = '审核进度加载中...';
+
+        // 异步加载JSON文件
+        fetch('/json/audit-status.json')
+            .then(response => {
+                // 检查网络响应是否正常
+                if (!response.ok) {
+                    throw new Error('网络响应异常');
+                }
+                return response.json(); // 返回JSON数据的解析结果
+            })
+            .then(data => {
+                // 处理获取的JSON数据
+                const currentDate = new Date(data.last_updated); // 当前日期
+
+                // 遍历每个类别的日期，计算日期差异并设置颜色类名
+                const categoriesList = data.categories.map(item => {
+                    const itemDate = new Date(item.date); // 类别的日期
+                    const diffTime = currentDate.getTime() - itemDate.getTime(); // 毫秒差异
+                    const diffDays = Math.floor(diffTime / (1000 * 3600 * 24)); // 转换为天数
+
+                    // 根据日期差异设置不同的颜色类名
+                    const colorClass =
+                        diffDays < 7 ? 'green' :
+                        diffDays >= 15 ? 'red' :
+                        'yellow';
+
+                    // 构造列表项的 HTML
+                    return `<li class="status-item ${colorClass}">${item.category} : ${item.date}</li>`;
+                }).join('');
+
+                // 构造完整的内容
+                const content = `
+                    <span class="status-title">百科审核进度 更新时间 : ${formatDate(data.last_updated)}</span>
+                    <ul class="status-list">${categoriesList}</ul>
+                `;
+
+                // 将内容填充到页面中的容器中
+                jsonList.innerHTML = content;
+
+                // 隐藏加载中的消息
+                loadingMessage.style.display = 'none';
+            })
+            .catch(error => {
+                // 捕获并处理任何错误
+                console.error('获取JSON数据时出错:', error);
+                // 在加载消息中显示错误信息
+                loadingMessage.textContent = '加载审核数据出错';
+            });
+    } else {
+        console.error('未找到元素'); // 元素未找到的错误处理
+    }
+
+    // 格式化日期函数
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        // 使用 toLocaleString() 方法将日期格式化为本地时间格式
+        return date.toLocaleString();
+    }
+});

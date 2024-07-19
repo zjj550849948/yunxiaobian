@@ -228,6 +228,54 @@ body {
     margin-right: 10px;
 }
 
+.item-block .loading-message {
+    margin: auto;
+    font-weight: bold;
+}
+
+.item-block .status-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 8px;
+}
+
+.item-block .status-list {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    margin-block-start: 5px;
+    padding-inline-start: 0px;
+    justify-content: space-evenly;
+}
+
+.item-block .status-item {
+    width: 192px;
+    height: 24px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 5px;
+    /* 调整列表项之间的间距 */
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+/* 不同日期差异的颜色样式 */
+
+.item-block .status-list .green {
+    background-color: lightgreen;
+}
+
+.item-block .status-list .yellow {
+    background-color: yellow;
+}
+
+.item-block .status-list .red {
+    background-color: lightcoral;
+}
+
 a:link {
     /* 超链接正常状态下的样式 */
     color: #000000;
