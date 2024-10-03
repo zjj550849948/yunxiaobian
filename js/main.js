@@ -51,6 +51,64 @@ function createArtistRepeatLink() {
     createLink("https://music.163.com/#/wiki/artist-repeat-error?artistId=", "artistRepeatUserInput", "artistRepeatLink");
 }
 
+// 任务配置，存储任务 ID 和类型
+const tasks = [
+    { id: "6504450", type: "yfc" },
+    { id: "6505450", type: "yfc2" },
+    { id: "6554452", type: "eygmfy" },
+    { id: "6539455", type: "rygmfy" },
+    { id: "6527461", type: "hygmfy" },
+    { id: "6553451", type: "ynygmfy" },
+    { id: "6558451", type: "tygmfy" },
+    { id: "6536459", type: "zygmfy" }
+];
+
+// 基础任务链接
+const baseTaskWebURL = "https://music.163.com/#/wiki/task-center/m/st/wiki/task-center/song/list?missionId=";
+const baseTaskMobileURL = "orpheus://activity?url=https%3A%2F%2Fmusic.163.com%2Fst%2Fmusicwiki%2Ftask-detail%3FmissionId%3D";
+
+// 任务链接创建
+function createTaskLink(taskID, taskWebLinks, taskMobileLinks) {
+
+    // 生成链接
+    const taskWebURL = baseTaskWebURL + encodeURIComponent(taskID);
+    const taskMobileURL = baseTaskMobileURL + encodeURIComponent(taskID);
+
+    // 修改网页端链接
+    taskWebLinks.forEach(link => {
+        link.href = taskWebURL;
+    });
+
+    // 修改移动端链接
+    taskMobileLinks.forEach(link => {
+        link.href = taskMobileURL;
+    });
+}
+
+// 任务初始化绑定
+document.addEventListener("DOMContentLoaded", function() {
+    // 创建缓存对象
+    const taskLinkMap = {};
+
+    // 一次性生成对应的链接类名并查询所有任务链接
+    tasks.forEach(task => {
+        const taskWebLinkClass = `.${task.type}TaskWebLink`; // 网页端任务链接的类名
+        const taskMobileLinkClass = `.${task.type}TaskMobileLink`; // 移动端任务链接的类名
+
+        // 查询并缓存对应类型的链接
+        const taskWebLinks = Array.from(document.querySelectorAll(taskWebLinkClass));
+        const taskMobileLinks = Array.from(document.querySelectorAll(taskMobileLinkClass));
+
+        taskLinkMap[task.type] = { taskWebLinks, taskMobileLinks };
+    });
+
+    // 创建对应任务类型的链接
+    tasks.forEach(task => {
+        const { taskWebLinks, taskMobileLinks } = taskLinkMap[task.type];
+        createTaskLink(task.id, taskWebLinks, taskMobileLinks);
+    });
+});
+
 // 监听滚动事件以显示或隐藏回到顶部容器
 window.onscroll = function() {
     if (window.scrollY > 100) {
@@ -96,7 +154,6 @@ window.onload = function() {
         var targetId = hash.slice(1);
         scrollToElement(targetId);
     }
-
 
     // 找到所有的跳转链接并添加点击事件监听器
     var links = document.querySelectorAll('a[href^="#"]');
@@ -210,7 +267,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 格式化日期函数
     function formatDate(dateString) {
         const date = new Date(dateString);
-        // 使用 toLocaleString() 方法将日期格式化为本地时间格式
-        return date.toLocaleString();
+
+        // 获取各个部分
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        // 返回格式化后的字符串
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 });
