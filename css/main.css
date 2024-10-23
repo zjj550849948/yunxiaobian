@@ -472,6 +472,7 @@ footer,
 }
 
 .footer .browser {
+    -webkit-text-size-adjust: 100%;
     font-size: 18px;
     color: #666;
 }
@@ -491,6 +492,7 @@ for404,
 .for404 .notice {
     background-position: 0 -405px;
     margin-top: 35px;
+    -webkit-text-size-adjust: 100%;
     font-size: 18px;
     color: #666;
 }
