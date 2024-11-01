@@ -55,12 +55,12 @@ function createArtistRepeatLink() {
 const tasks = [
     { id: "6504450", type: "yfc" },
     { id: "6505450", type: "yfc2" },
-    { id: "6554452", type: "eygmfy" },
-    { id: "6539455", type: "rygmfy" },
-    { id: "6527461", type: "hygmfy" },
-    { id: "6553451", type: "ynygmfy" },
-    { id: "6558451", type: "tygmfy" },
-    { id: "6536459", type: "zygmfy" }
+    { id: "6582451", type: "eygmfy" },
+    { id: "6568451", type: "rygmfy" },
+    { id: "6571454", type: "hygmfy" },
+    { id: "6581451", type: "ynygmfy" },
+    { id: "6579451", type: "tygmfy" },
+    { id: "6582452", type: "zygmfy" }
 ];
 
 // 基础任务链接
