@@ -1,11 +1,11 @@
-// 编辑页面直达
-function createLink(baseURL, inputElementId, linkElementId) {
+// 创建动态链接的函数
+function createLink(baseURL, inputElementId, linkElementId, additionalParams = '') {
     var userInput = document.getElementById(inputElementId).value;
-    var fullURL = baseURL + encodeURIComponent(userInput);
+    var fullURL = baseURL + encodeURIComponent(userInput) + additionalParams;
     document.getElementById(linkElementId).href = fullURL;
 }
 
-// 回车进入编辑页
+// 回车进入编辑页和搜索页
 function bindEnterKey(inputElementId, linkElementId, createFunction) {
     document.getElementById(inputElementId).addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
@@ -19,11 +19,29 @@ function bindEnterKey(inputElementId, linkElementId, createFunction) {
 
 // 初始化绑定
 document.addEventListener("DOMContentLoaded", function() {
+    // 自动聚焦到搜索框
+    document.getElementById('searchQuery').focus();
+
+    // 为搜索类型下拉框添加事件监听，切换时更新链接
+    document.getElementById('searchType').addEventListener('change', function() {
+        createSearchLink();  // 切换搜索类型时，更新搜索链接
+    });
+
+    // 监听触摸事件，点击页面其他地方时移除所有 hover 效果
+    document.addEventListener('touchend', function(event) {
+        // 如果点击的不是按钮或输入框，则移除 hover 效果
+        if (!event.target.closest('.search-button') && !event.target.closest('.search-input')) {
+            document.querySelectorAll('.hover').forEach(el => el.classList.remove('hover'));
+        }
+    });
+
+    // 绑定回车事件
     bindEnterKey("songUserInput", "songLink", createSongLink);
     bindEnterKey("albumUserInput", "albumLink", createAlbumLink);
     bindEnterKey("artistUserInput", "artistLink", createArtistLink);
     bindEnterKey("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
     bindEnterKey("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
+    bindEnterKey("searchQuery", "searchLink", createSearchLink);
 });
 
 // 歌曲编辑页面直达
@@ -50,6 +68,23 @@ function createAddAlbumLink() {
 function createArtistRepeatLink() {
     createLink("https://music.163.com/#/wiki/artist-repeat-error?artistId=", "artistRepeatUserInput", "artistRepeatLink");
 }
+
+// 搜索页面直达
+function createSearchLink() {
+    // 获取输入框的搜索词和选择的搜索类型
+    const query = document.getElementById('searchQuery').value;
+    const type = document.getElementById('searchType').value;
+
+    // 如果输入框为空，移除 href 属性
+    if (!query.trim()) {
+        searchLink.removeAttribute('href'); // 移除 href 属性
+        return;
+    }
+
+    // 使用 createLink 来生成和设置搜索链接
+    createLink("https://music.163.com/#/search/m/?s=", 'searchQuery', 'searchLink', `&type=${type}`);
+}
+
 
 // 任务配置，存储任务 ID 和类型
 const tasks = [
@@ -127,12 +162,13 @@ function scrollToTop() {
 
 // 导航栏跳转修正
 window.onload = function() {
-    // 获取导航栏和菜单及公告的高度
+    // 获取导航栏和菜单及公告和搜索框的高度
     var navHeight = document.querySelector('.nav') ? document.querySelector('.nav').offsetHeight : 0;
     var menuHeight = document.querySelector('.menu') ? document.querySelector('.menu').offsetHeight : 0;
+    var searchHeight = document.querySelector('.search') ? document.querySelector('.search').offsetHeight : 0;
     var topNoticeHeight = document.querySelector('.top-notice') ? document.querySelector('.top-notice').offsetHeight : 0;
     // 计算修正值
-    var correction = navHeight + menuHeight + topNoticeHeight;
+    var correction = navHeight + menuHeight + searchHeight + topNoticeHeight;
 
     // 处理跳转事件
     function scrollToElement(elementId) {

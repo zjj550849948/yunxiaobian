@@ -133,6 +133,106 @@ menu,
 }
 
 
+/* 搜索框 */
+
+.search,
+.search {
+    width: 100%;
+    height: 40px;
+    background: #BEE1F4;
+    border-bottom: 1px solid #dfdfdf;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 115px;
+}
+
+.search-select {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    color: #000;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+    margin-right: 10px;
+    font-size: 17px;
+    font-weight: 600;
+    transition: border-color 0.3s ease;
+}
+
+.search-select:hover {
+    border: 1px solid #1890ff;
+}
+
+.search-select:focus {
+    outline: none;  /* 去除默认的聚焦样式 */
+    border: 1px solid #1890ff;
+}
+
+.search-input {
+    width: 400px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.search-button {
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1976d2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* 通过 :not() 确保访问和未访问的链接样式一致 */
+.search-button:link,
+.search-button:visited {
+  color: #fff; /* 确保链接在点击后依然是白色 */
+}
+
+.search-button:hover {
+    background-color: #1890ff;
+}
+
+.search-button:active {
+    background-color: #135e96;
+}
+
+
+/* 输入框效果 */
+
+input {
+    padding: 4px;
+    width: 177px;
+    border-radius: 4px;
+    border: 1px solid #d9d9d9; /* 默认边框 */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input:hover {
+    border: 1px solid #1890ff;  /* 鼠标悬停时边框颜色 */
+}
+
+input:focus {
+    outline: none;  /* 去除默认的聚焦样式 */
+    border: 1px solid #1890ff;  /* 设置边框颜色 */
+}
+
+
 /* 顶部公告 */
 
 .top-notice,
@@ -140,13 +240,14 @@ menu,
     width: 100%;
     height: 50px;
     background-color: #F7F7F7;
+    border-bottom: 1px solid #dfdfdf;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 5%;
     box-sizing: border-box;
     position: fixed;
-    top: 115px;
+    top: 160px;
 }
 
 .top-notice img {
@@ -185,6 +286,11 @@ body {
     height: 35px;
 }
 
+/* search占位符 */
+
+.placeholder-search {
+    height: 45px;
+}
 
 /* top-notice占位符 */
 
@@ -255,8 +361,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 5px;
-    /* 调整列表项之间的间距 */
+    margin-bottom: 5px;  /* 调整列表项之间的间距 */
     font-size: 17px;
     font-weight: bold;
 }
@@ -276,20 +381,18 @@ body {
     background-color: lightcoral;
 }
 
+/* 超链接正常状态下的样式 */
+
 a:link {
-    /* 超链接正常状态下的样式 */
-    color: #000000;
-    /* 黑色 */
-    text-decoration: none;
-    /* 无下划线 */
+    color: #000000;  /* 黑色 */
+    text-decoration: none;  /* 无下划线 */
 }
 
+/* 访问过的超链接 */
+
 a:visited {
-    /* 访问过的超链接 */
-    color: #000000;
-    /* 黑色 */
-    text-decoration: none;
-    /* 无下划线 */
+    color: #000000;  /* 黑色 */
+    text-decoration: none;  /* 无下划线 */
 }
 
 .item-top {
@@ -347,8 +450,7 @@ a:visited {
     align-items: center;
     margin-left: 15px;
     margin-right: 5px;
-    height: 100%;
-    /* 让label的高度填满父元素 */
+    height: 100%;  /* 让label的高度填满父元素 */
     cursor: pointer;
 }
 
@@ -357,8 +459,8 @@ a:visited {
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    /* 让link的高度填充父元素 */
+    height: 100%;  /* 让link的高度填充父元素 */
+    cursor: pointer; 
 }
 
 .item-bottom .link:hover {
@@ -388,20 +490,14 @@ a:visited {
     position: fixed;
     bottom: 50px;
     right: 50px;
-    opacity: 0;
-    /* 初始状态为透明 */
-    visibility: hidden;
-    /* 初始状态为隐藏 */
-    /* 其他样式 */
-    transition: opacity 0.25s ease-in-out;
-    /* 使用 opacity 属性进行渐变显示效果 */
+    opacity: 0;  /* 初始状态为透明 */
+    visibility: hidden;  /* 初始状态为隐藏 */
+    transition: opacity 0.25s ease-in-out;  /* 使用 opacity 属性进行渐变显示效果 */
 }
 
 .back-to-top.show {
-    opacity: 1;
-    /* 添加显示按钮的类时将其显示 */
-    visibility: visible;
-    /* 添加显示按钮的类时将其显示 */
+    opacity: 1;  /* 添加显示按钮的类时将其显示 */
+    visibility: visible;  /* 添加显示按钮的类时将其显示 */
 }
 
 .back-to-top-btn {
