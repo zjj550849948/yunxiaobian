@@ -104,6 +104,7 @@ menu,
     padding: 0 5%;
     box-sizing: border-box;
     position: fixed;
+    z-index: 1;
     top: 80px;
 }
 
@@ -133,7 +134,7 @@ menu,
 }
 
 
-/* 搜索框 */
+/* 顶部搜索 */
 
 .search,
 .search {
@@ -146,6 +147,7 @@ menu,
     justify-content: center;
     align-items: center;
     position: fixed;
+    z-index: 1;
     top: 115px;
 }
 
@@ -170,6 +172,7 @@ menu,
 .search-select:focus {
     outline: none;  /* 去除默认的聚焦样式 */
     border: 1px solid #1890ff;
+    box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
 }
 
 .search-input {
@@ -215,8 +218,12 @@ menu,
 
 /* 输入框效果 */
 
+.input-wrapper {
+    position: relative;
+}
+
 input {
-    padding: 4px;
+    padding: 4px 30px 4px 4px;
     width: 177px;
     border-radius: 4px;
     border: 1px solid #d9d9d9; /* 默认边框 */
@@ -231,6 +238,24 @@ input:hover {
 input:focus {
     outline: none;  /* 去除默认的聚焦样式 */
     border: 1px solid #1890ff;  /* 设置边框颜色 */
+    box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
+}
+
+/* 清除按钮 */
+
+.clear-button {
+    position: absolute;
+    right: 5%;
+    top: 40%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    color: #aaa;
+    cursor: pointer;
+    display: none;  /* 默认隐藏 */
+}
+
+.clear-button:hover {
+    color: #1976d2;
 }
 
 
@@ -248,6 +273,7 @@ input:focus {
     padding: 0 5%;
     box-sizing: border-box;
     position: fixed;
+    z-index: 1;
     top: 160px;
 }
 

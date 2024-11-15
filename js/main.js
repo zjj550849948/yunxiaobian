@@ -42,6 +42,14 @@ document.addEventListener("DOMContentLoaded", function() {
     bindEnterKey("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
     bindEnterKey("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
     bindEnterKey("searchQuery", "searchLink", createSearchLink);
+
+    // 初始化清空按钮功能
+    initClearButton("songUserInput", "songLink", createSongLink);
+    initClearButton("albumUserInput", "albumLink", createAlbumLink);
+    initClearButton("artistUserInput", "artistLink", createArtistLink);
+    initClearButton("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
+    initClearButton("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
+    initClearButton("searchQuery", "searchLink", createSearchLink);
 });
 
 // 歌曲编辑页面直达
@@ -75,14 +83,62 @@ function createSearchLink() {
     const query = document.getElementById('searchQuery').value;
     const type = document.getElementById('searchType').value;
 
-    // 如果输入框为空，移除 href 属性
-    if (!query.trim()) {
-        searchLink.removeAttribute('href'); // 移除 href 属性
-        return;
-    }
-
     // 使用 createLink 来生成和设置搜索链接
     createLink("https://music.163.com/#/search/m/?s=", 'searchQuery', 'searchLink', `&type=${type}`);
+}
+
+// 清空按钮功能通用函数
+function initClearButton(inputElementId, linkElementId, createLink) {
+    const inputElement = document.getElementById(inputElementId);   // 获取输入框
+    const linkElement = document.getElementById(linkElementId);      // 获取链接
+
+    let inputWrapper = inputElement.parentNode;  // 获取输入框的父容器
+
+    // 如果没有父容器则动态创建一个 wrapper 包裹 input 和 clear-button
+    if (!inputWrapper.classList.contains('input-wrapper')) {
+        inputWrapper = document.createElement('div');
+        inputWrapper.classList.add('input-wrapper');
+        inputElement.parentNode.insertBefore(inputWrapper, inputElement);
+        inputWrapper.appendChild(inputElement);
+    }
+
+    // 如果没有清空按钮，就动态创建它
+    let clearButton = inputWrapper.querySelector('.clear-button');
+    if (!clearButton) {
+        clearButton = document.createElement('span');
+        clearButton.classList.add('clear-button');
+        clearButton.textContent = '×';
+        inputWrapper.appendChild(clearButton); // 将清空按钮插入到输入框旁边
+    }
+
+    // 更新清空按钮的显示状态和链接
+    function updateClearButton() {
+        if (inputElement.value.trim()) {
+            clearButton.style.display = 'block';  // 显示清空按钮
+            createLink(inputElement, linkElement);  // 有内容时，更新链接
+        } else {
+            clearButton.style.display = 'none';  // 隐藏清空按钮
+            linkElement.removeAttribute('href');  // 输入框为空时移除链接的 href 属性
+        }
+    }
+
+    // 监听输入框内容变化
+    inputElement.addEventListener('input', updateClearButton);
+
+    // 点击清空按钮时清空输入框内容
+    clearButton.addEventListener('click', function() {
+        inputElement.value = '';  // 清空输入框内容
+        updateClearButton();  // 更新清空按钮的显示状态和链接
+        inputElement.focus();  // 聚焦到输入框
+    });
+
+    // 失去焦点时检查输入框内容并更新链接
+    inputElement.addEventListener('blur', function() {
+        updateClearButton();  // 确保失去焦点时更新链接和清空按钮
+    });
+
+    // 初始化时，更新清空按钮的显示状态和链接
+    updateClearButton();
 }
 
 
