@@ -19,14 +19,6 @@ function bindEnterKey(inputElementId, linkElementId, createFunction) {
 
 // 初始化绑定
 document.addEventListener("DOMContentLoaded", function() {
-    // 自动聚焦到搜索框
-    document.getElementById('searchQuery').focus();
-
-    // 为搜索类型下拉框添加事件监听，切换时更新链接
-    document.getElementById('searchType').addEventListener('change', function() {
-        createSearchLink();  // 切换搜索类型时，更新搜索链接
-    });
-
     // 监听触摸事件，点击页面其他地方时移除所有 hover 效果
     document.addEventListener('touchend', function(event) {
         // 如果点击的不是按钮或输入框，则移除 hover 效果
@@ -49,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     initClearButton("artistUserInput", "artistLink", createArtistLink);
     initClearButton("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
     initClearButton("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
-    initClearButton("searchQuery", "searchLink", createSearchLink);
+    initClearButton("searchQuery", "searchLink", createSearchLink, "searchType");
 });
 
 // 歌曲编辑页面直达
@@ -80,7 +72,6 @@ function createArtistRepeatLink() {
 // 搜索页面直达
 function createSearchLink() {
     // 获取输入框的搜索词和选择的搜索类型
-    const query = document.getElementById('searchQuery').value;
     const type = document.getElementById('searchType').value;
 
     // 使用 createLink 来生成和设置搜索链接
@@ -88,9 +79,10 @@ function createSearchLink() {
 }
 
 // 清空按钮功能通用函数
-function initClearButton(inputElementId, linkElementId, createLink) {
+function initClearButton(inputElementId, linkElementId, createLink, additionalParamsElementId) {
     const inputElement = document.getElementById(inputElementId);   // 获取输入框
     const linkElement = document.getElementById(linkElementId);      // 获取链接
+    const additionalParamsElement = additionalParamsElementId ? document.getElementById(additionalParamsElementId) : null; // 获取附加参数（如 <select>）
 
     let inputWrapper = inputElement.parentNode;  // 获取输入框的父容器
 
@@ -113,17 +105,29 @@ function initClearButton(inputElementId, linkElementId, createLink) {
 
     // 更新清空按钮的显示状态和链接
     function updateClearButton() {
-        if (inputElement.value.trim()) {
-            clearButton.style.display = 'block';  // 显示清空按钮
-            createLink(inputElement, linkElement);  // 有内容时，更新链接
+        const hasValue = inputElement.value.trim();  // 判断输入框是否有内容
+        clearButton.style.display = hasValue ? 'block' : 'none';  // 显示或隐藏清空按钮
+
+        // 获取附加参数（如 <select>）
+        const additionalParams = additionalParamsElement ? `&type=${additionalParamsElement.value}` : '';
+
+        // 如果有值，更新链接
+        if (hasValue) {
+            createLink(inputElement, linkElement, additionalParams);  // 更新链接
+            linkElement.target = "_blank";  // 确保在点击时打开新标签
         } else {
-            clearButton.style.display = 'none';  // 隐藏清空按钮
-            linkElement.removeAttribute('href');  // 输入框为空时移除链接的 href 属性
+            linkElement.href = 'javascript:void(0);'; // 输入框为空时，设置无效链接，防止跳转
+            linkElement.target = '_self'; // 设置 target 为 _self，避免新标签页打开
         }
     }
 
     // 监听输入框内容变化
     inputElement.addEventListener('input', updateClearButton);
+
+    // 监听类型选择框变化，切换时更新链接
+    if (additionalParamsElement) {
+        additionalParamsElement.addEventListener('change', updateClearButton);
+    }
 
     // 点击清空按钮时清空输入框内容
     clearButton.addEventListener('click', function() {
@@ -133,13 +137,12 @@ function initClearButton(inputElementId, linkElementId, createLink) {
     });
 
     // 失去焦点时检查输入框内容并更新链接
-    inputElement.addEventListener('blur', function() {
-        updateClearButton();  // 确保失去焦点时更新链接和清空按钮
-    });
+    inputElement.addEventListener('blur', updateClearButton);
 
     // 初始化时，更新清空按钮的显示状态和链接
     updateClearButton();
 }
+
 
 
 // 任务配置，存储任务 ID 和类型
