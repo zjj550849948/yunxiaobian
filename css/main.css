@@ -151,31 +151,109 @@ menu,
     top: 115px;
 }
 
+/* 选择框样式 */
 .search-select {
     width: 80px;
     height: 40px;
-    text-align: center;
     background-color: #fff;
     color: #000;
     border-radius: 4px;
     border: 1px solid #dfdfdf;
     margin-right: 10px;
+    padding-right: 7px;
     font-size: 17px;
     font-weight: 600;
     transition: border-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* 垂直居中 */
+    position: relative;
+    box-sizing: border-box;
+    user-select: none;  /* 禁止选择文本 */
+    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
 }
 
+/* 选择框的箭头样式 */
+.search-select::after {
+    content: "";
+    position: absolute;
+    right: 16px;  /* 箭头的右边距 */
+    width: 4px;
+    height: 4px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(315deg);  /* 初始时为向下箭头 */
+    transition: transform 0.3s ease;
+}
+
+/* 选择框 hover 和 focus 样式 */
 .search-select:hover {
     border: 1px solid #1890ff;
 }
 
 .search-select:focus {
-    outline: none;  /* 去除默认的聚焦样式 */
+    outline: none;
     border: 1px solid #1890ff;
     box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
 }
 
+.search-type-box {
+    position: absolute;
+    top: 44px;
+    width: 80px;
+    background-color: #fff;
+    border: 1px solid #1890ff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
+    z-index: 1;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transform: scaleY(0) translateY(-10px); /* 初始状态：缩小并在顶部 */
+    transform-origin: top;  /* 缩放的基准点在顶部 */
+    transition: opacity 0.3s ease, visibility 0s ease 0.3s, transform 0.3s ease;
+}
+
+.search-type-box.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scaleY(1) translateY(0); /* 展开并恢复到正常位置 */
+    transition: opacity 0.3s ease, visibility 0s ease 0s, transform 0.3s ease;
+}
+
+/* 下拉菜单选项 */
+.search-type-option {
+    display: flex; 
+    justify-content: center;
+    padding: 5px 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;  /* 禁止选择文本 */
+    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
+    transition: background-color 0.3s ease;
+}
+
+/* hover 样式 */
+.search-type-option:hover {
+    background-color: #1890ff;
+}
+
+/* 键盘选中样式 */
+.search-type-option.selected {
+    color: #fff;
+    background-color: #1890ff;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* 下拉框展开时箭头旋转 */
+.search-select.open::after {
+    transform: rotate(135deg);  /* 旋转180度变为向上箭头 */
+}
+
 .search-input {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     width: 400px;
     height: 40px;
     margin-right: 10px;
@@ -183,6 +261,10 @@ menu,
     font-size: 17px;
     font-weight: 600;
     line-height: 40px;
+}
+
+.search-input::placeholder {
+    color: #9b9b9b; /* 自定义占位符颜色 */
 }
 
 .search-button {
@@ -198,7 +280,10 @@ menu,
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    user-select: none;  /* 禁止选择文本 */
+    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
+    transition: background-color 0.3s ease;
 }
 
 /* 通过 :not() 确保访问和未访问的链接样式一致 */
@@ -241,18 +326,20 @@ input:focus {
     box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
 }
 
+
 /* 清除按钮 */
 
 .clear-button {
     position: absolute;
-    right: 4%;
-    top: 43%;
+    right: 5%;
+    top: 50%;
     transform: translateY(-50%);
-    font-size: 190%;
-    color: #aaa;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #9b9b9b;
     cursor: pointer;
     display: none;  /* 默认隐藏 */
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .clear-button:hover {
@@ -364,6 +451,7 @@ body {
     width: 452px;
     margin-bottom: 20px;
     margin-right: 10px;
+    border-radius: 4px;
 }
 
 .item-block .loading-message {
@@ -396,6 +484,7 @@ body {
     margin-bottom: 5px;  /* 调整列表项之间的间距 */
     font-size: 17px;
     font-weight: bold;
+    border-radius: 4px;
 }
 
 
@@ -475,6 +564,7 @@ a:visited {
     color: #000000;
     background-color: #F7F7F7;
     font-size: 13px;
+    border-radius: 0 0 4px 4px;
 }
 
 .item-bottom label {
