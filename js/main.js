@@ -24,14 +24,6 @@ function bindEnterKey(inputElementId, linkElementId, createFunction) {
 
 // 初始化绑定
 document.addEventListener("DOMContentLoaded", function() {
-    // 监听触摸事件，点击页面其他地方时移除所有 hover 效果
-    document.addEventListener('touchend', function(event) {
-        // 如果点击的不是按钮或输入框，则移除 hover 效果
-        if (!event.target.closest('.search-button') && !event.target.closest('.search-input')) {
-            document.querySelectorAll('.hover').forEach(el => el.classList.remove('hover'));
-        }
-    });
-
     // 绑定回车事件
     bindEnterKey("songUserInput", "songLink", createSongLink);
     bindEnterKey("albumUserInput", "albumLink", createAlbumLink);
@@ -309,12 +301,12 @@ function initClearButton(inputElementId, linkElementId, createLink) {
 const tasks = [
     { id: "6504450", type: "yfc" },
     { id: "6505450", type: "yfc2" },
-    { id: "6582451", type: "eygmfy" },
-    { id: "6568451", type: "rygmfy" },
-    { id: "6571454", type: "hygmfy" },
-    { id: "6581451", type: "ynygmfy" },
-    { id: "6579451", type: "tygmfy" },
-    { id: "6582452", type: "zygmfy" }
+    { id: "6570457", type: "eygmfy" },
+    { id: "6591454", type: "rygmfy" },
+    { id: "6590454", type: "hygmfy" },
+    { id: "6568458", type: "ynygmfy" },
+    { id: "6567458", type: "tygmfy" },
+    { id: "6569456", type: "zygmfy" }
 ];
 
 // 基础任务链接
@@ -378,6 +370,11 @@ function scrollToTop() {
         top: 0,
     });
 }
+
+// 监听触摸事件，点击页面其他地方时移除所有 hover 效果
+document.addEventListener('touchend', function() {
+    document.querySelectorAll('.hover').forEach(el => el.classList.remove('hover'));
+});
 
 // 导航栏跳转修正
 window.onload = function() {
