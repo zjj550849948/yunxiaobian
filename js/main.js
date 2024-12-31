@@ -539,3 +539,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 });
+
+// 版权所有年份自动更新
+document.addEventListener("DOMContentLoaded", () => {
+    const copyYear = new Date().getFullYear(); // 当前年份
+    const yearElement = document.getElementById("copy-year"); // 获取 id=copy-year 的元素
+    if (yearElement) {
+        yearElement.textContent = copyYear; // 更新内容
+    } else {
+        console.error("元素 #copy-year 不存在！");
+    }
+});
