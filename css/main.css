@@ -92,7 +92,7 @@ menu,
 
 /* 顶部导航 */
 
-.nav,
+nav,
 .nav {
     width: 100%;
     height: 35px;
@@ -136,7 +136,6 @@ menu,
 
 /* 顶部搜索 */
 
-.search,
 .search {
     width: 100%;
     height: 40px;
@@ -166,24 +165,24 @@ menu,
     transition: border-color 0.3s ease;
     display: flex;
     justify-content: center;
-    align-items: center;  /* 垂直居中 */
+    align-items: center; /* 垂直居中 */
     position: relative;
     box-sizing: border-box;
-    user-select: none;  /* 禁止选择文本 */
-    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
-    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
+    user-select: none; /* 禁止选择文本 */
+    -webkit-user-select: none; /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none; /* 对 Firefox 的兼容性处理 */
 }
 
 /* 选择框的箭头样式 */
 .search-select::after {
     content: "";
     position: absolute;
-    right: 16px;  /* 箭头的右边距 */
+    right: 16px; /* 箭头的右边距 */
     width: 4px;
     height: 4px;
     border-left: 2px solid #000;
     border-bottom: 2px solid #000;
-    transform: rotate(315deg);  /* 初始时为向下箭头 */
+    transform: rotate(315deg); /* 初始时为向下箭头 */
     transition: transform 0.3s ease;
 }
 
@@ -211,7 +210,7 @@ menu,
     opacity: 0;
     visibility: hidden;
     transform: scaleY(0) translateY(-10px); /* 初始状态：缩小并在顶部 */
-    transform-origin: top;  /* 缩放的基准点在顶部 */
+    transform-origin: top; /* 缩放的基准点在顶部 */
     transition: opacity 0.3s ease, visibility 0s ease 0.3s, transform 0.3s ease;
 }
 
@@ -229,9 +228,9 @@ menu,
     padding: 5px 5px 5px 0;
     cursor: pointer;
     font-size: 16px;
-    user-select: none;  /* 禁止选择文本 */
-    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
-    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
+    user-select: none; /* 禁止选择文本 */
+    -webkit-user-select: none; /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none; /* 对 Firefox 的兼容性处理 */
     transition: background-color 0.3s ease;
 }
 
@@ -249,7 +248,7 @@ menu,
 
 /* 下拉框展开时箭头旋转 */
 .search-select.open::after {
-    transform: rotate(135deg);  /* 旋转180度变为向上箭头 */
+    transform: rotate(135deg); /* 旋转180度变为向上箭头 */
 }
 
 .search-input {
@@ -280,9 +279,9 @@ menu,
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
-    user-select: none;  /* 禁止选择文本 */
-    -webkit-user-select: none;  /* 对 WebKit 内核浏览器的兼容性处理 */
-    -moz-user-select: none;  /* 对 Firefox 的兼容性处理 */
+    user-select: none; /* 禁止选择文本 */
+    -webkit-user-select: none; /* 对 WebKit 内核浏览器的兼容性处理 */
+    -moz-user-select: none; /* 对 Firefox 的兼容性处理 */
     transition: background-color 0.3s ease;
 }
 
@@ -317,12 +316,12 @@ input {
 }
 
 input:hover {
-    border: 1px solid #1890ff;  /* 鼠标悬停时边框颜色 */
+    border: 1px solid #1890ff; /* 鼠标悬停时边框颜色 */
 }
 
 input:focus {
-    outline: none;  /* 去除默认的聚焦样式 */
-    border: 1px solid #1890ff;  /* 设置边框颜色 */
+    outline: none; /* 去除默认的聚焦样式 */
+    border: 1px solid #1890ff; /* 设置边框颜色 */
     box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
 }
 
@@ -338,7 +337,7 @@ input:focus {
     font-weight: 600;
     color: #9b9b9b;
     cursor: pointer;
-    display: none;  /* 默认隐藏 */
+    display: none; /* 默认隐藏 */
     transition: color 0.3s ease;
 }
 
@@ -353,7 +352,6 @@ input:focus {
 
 /* 顶部公告 */
 
-.top-notice,
 .top-notice {
     width: 100%;
     height: 50px;
@@ -380,18 +378,6 @@ input:focus {
 }
 
 
-/* 主体内容 */
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #F7F7F7;
-    scroll-behavior: smooth;
-}
-
-
 /* menu占位符 */
 
 .placeholder-menu {
@@ -405,16 +391,30 @@ body {
     height: 35px;
 }
 
+
 /* search占位符 */
 
 .placeholder-search {
     height: 45px;
 }
 
+
 /* top-notice占位符 */
 
 .placeholder-top-notice {
     height: 50px;
+}
+
+
+/* 主体内容 */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #F7F7F7;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -427,14 +427,14 @@ body {
     font-size: 16px;
     font-weight: bold;
     height: 40px;
-    padding-left: 10px;
+    padding-left: 15px;
     background-color: #EFF7FF
 }
 
 .container-body {
     display: flex;
     border-top: 1px solid #dfdfdf;
-    padding: 20px 10px 0 10px;
+    padding: 20px 10px 0 15px;
     /*justify-content: space-between;*/
     flex-direction: row;
     flex-wrap: wrap;
@@ -450,8 +450,18 @@ body {
     height: 160px;
     width: 452px;
     margin-bottom: 20px;
-    margin-right: 10px;
+    margin-right: 15px;
     border-radius: 4px;
+    transition-duration: 0.3s;
+}
+
+.item-block:hover {
+    box-shadow: 0px 0px 10px 2px #1890ff;
+    transition: box-shadow 0.3s ease;
+}
+
+.item-block label{
+    cursor: pointer;
 }
 
 .item-block .loading-message {
@@ -481,15 +491,13 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 5px;  /* 调整列表项之间的间距 */
+    margin-bottom: 5px; /* 调整列表项之间的间距 */
     font-size: 17px;
     font-weight: bold;
     border-radius: 4px;
 }
 
-
 /* 不同日期差异的颜色样式 */
-
 .item-block .status-list .green {
     background-color: lightgreen;
 }
@@ -503,17 +511,15 @@ body {
 }
 
 /* 超链接正常状态下的样式 */
-
 a:link {
-    color: #000000;  /* 黑色 */
-    text-decoration: none;  /* 无下划线 */
+    color: #000000; /* 黑色 */
+    text-decoration: none; /* 无下划线 */
 }
 
 /* 访问过的超链接 */
-
 a:visited {
-    color: #000000;  /* 黑色 */
-    text-decoration: none;  /* 无下划线 */
+    color: #000000; /* 黑色 */
+    text-decoration: none; /* 无下划线 */
 }
 
 .item-top {
@@ -572,8 +578,7 @@ a:visited {
     align-items: center;
     margin-left: 15px;
     margin-right: 5px;
-    height: 100%;  /* 让label的高度填满父元素 */
-    cursor: pointer;
+    height: 100%; /* 让label的高度填满父元素 */
 }
 
 .item-bottom .link {
@@ -581,7 +586,7 @@ a:visited {
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-    height: 100%;  /* 让link的高度填充父元素 */
+    height: 100%; /* 让link的高度填充父元素 */
     cursor: pointer; 
 }
 
@@ -607,19 +612,21 @@ a:visited {
     background-color: #dfdfdf;
 }
 
-.back-to-top,
+
+/* 回到顶部 */
+
 .back-to-top {
     position: fixed;
     bottom: 50px;
     right: 50px;
-    opacity: 0;  /* 初始状态为透明 */
-    visibility: hidden;  /* 初始状态为隐藏 */
-    transition: opacity 0.25s ease-in-out;  /* 使用 opacity 属性进行渐变显示效果 */
+    opacity: 0; /* 初始状态为透明 */
+    visibility: hidden; /* 初始状态为隐藏 */
+    transition: opacity 0.25s ease-in-out; /* 使用 opacity 属性进行渐变显示效果 */
 }
 
 .back-to-top.show {
-    opacity: 1;  /* 添加显示按钮的类时将其显示 */
-    visibility: visible;  /* 添加显示按钮的类时将其显示 */
+    opacity: 1; /* 添加显示按钮的类时将其显示 */
+    visibility: visible; /* 添加显示按钮的类时将其显示 */
 }
 
 .back-to-top-btn {
@@ -677,8 +684,12 @@ a:visited {
     transition-duration: 0.3s;
 }
 
+
+/* 页面底部 */
+
 footer,
 .footer {
+    -webkit-text-size-adjust: 100%;
     padding-bottom: 10px;
     line-height: 30px;
     text-align: center;
@@ -690,7 +701,6 @@ footer,
 }
 
 .footer .browser {
-    -webkit-text-size-adjust: 100%;
     font-size: 18px;
     color: #666;
 }
@@ -700,8 +710,11 @@ footer,
     color: #1890ff;
 }
 
-for404,
+
+/* 404页面 */
+
 .for404 {
+    -webkit-text-size-adjust: 100%;
     padding: 60px 0 60px;
     text-align: center;
     background-color: #fff;
@@ -710,7 +723,6 @@ for404,
 .for404 .notice {
     background-position: 0 -405px;
     margin-top: 35px;
-    -webkit-text-size-adjust: 100%;
     font-size: 18px;
     color: #666;
 }
