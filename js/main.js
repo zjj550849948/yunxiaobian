@@ -99,7 +99,9 @@ function bindDropdownOptions(optionsSelector, labelElement, queryElement, onOpti
 
             // 调用更新回调
             if (onOptionSelected) onOptionSelected();
-            queryElement.focus();
+            queryElement.focus({
+                preventScroll: true,
+            });
         }
     });
 }
@@ -301,12 +303,12 @@ function initClearButton(inputElementId, linkElementId, createLink) {
 const tasks = [
     { id: "6504450", type: "yfc" },
     { id: "6505450", type: "yfc2" },
-    { id: "6594459", type: "eygmfy" },
-    { id: "6600457", type: "rygmfy" },
-    { id: "6591458", type: "hygmfy" },
-    { id: "6597457", type: "ynygmfy" },
-    { id: "6606456", type: "tygmfy" },
-    { id: "6584464", type: "zygmfy" }
+    { id: "6621452", type: "eygmfy" },
+    { id: "6617451", type: "rygmfy" },
+    { id: "6614452", type: "hygmfy" },
+    { id: "6618451", type: "ynygmfy" },
+    { id: "6625451", type: "tygmfy" },
+    { id: "6630450", type: "zygmfy" }
 ];
 
 // 基础任务链接
@@ -374,6 +376,18 @@ function scrollToTop() {
 // 监听触摸事件，点击页面其他地方时移除所有 hover 效果
 document.addEventListener('touchend', function() {
     document.querySelectorAll('.hover').forEach(el => el.classList.remove('hover'));
+});
+
+// 鼠标移动到输入框时自动聚焦
+document.addEventListener("DOMContentLoaded", () => {
+    const inputElements = document.querySelectorAll('input');
+
+    // 遍历每个 input 元素并为其添加鼠标移入事件
+    inputElements.forEach(function(inputElement) {
+      inputElement.addEventListener('mouseover', function() {
+        inputElement.focus();
+      });
+    });
 });
 
 // 导航栏跳转修正
