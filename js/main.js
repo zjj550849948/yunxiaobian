@@ -303,12 +303,12 @@ function initClearButton(inputElementId, linkElementId, createLink) {
 const tasks = [
     { id: "6504450", type: "yfc" },
     { id: "6505450", type: "yfc2" },
-    { id: "6621452", type: "eygmfy" },
-    { id: "6617451", type: "rygmfy" },
-    { id: "6614452", type: "hygmfy" },
-    { id: "6618451", type: "ynygmfy" },
-    { id: "6625451", type: "tygmfy" },
-    { id: "6630450", type: "zygmfy" }
+    { id: "6665451", type: "eygmfy" },
+    { id: "6677450", type: "rygmfy" },
+    { id: "6675451", type: "hygmfy" },
+    { id: "6671451", type: "ynygmfy" },
+    { id: "6662452", type: "tygmfy" },
+    { id: "6668451", type: "zygmfy" }
 ];
 
 // 基础任务链接
