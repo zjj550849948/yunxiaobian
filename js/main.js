@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
     searchOptions.forEach((option, index) => {
         option.setAttribute('tabindex', '-1'); // 禁止选项被默认聚焦，确保焦点控制完全由代码管理
     
-        option.addEventListener('keydown', function (event) {
+        option.addEventListener('keydown', function(event) {
             if (event.key === 'ArrowDown') {
                 event.preventDefault(); // 阻止页面滚动
                 const nextOption = searchOptions[index + 1] || searchOptions[0];
@@ -299,17 +299,16 @@ function initClearButton(inputElementId, linkElementId, createLink) {
     updateClearButton();
 }
 
-// 任务配置，存储任务 ID 和类型
-const tasks = [
-    { id: "6504450", type: "yfc" },
-    { id: "6505450", type: "yfc2" },
-    { id: "6665451", type: "eygmfy" },
-    { id: "6677450", type: "rygmfy" },
-    { id: "6675451", type: "hygmfy" },
-    { id: "6671451", type: "ynygmfy" },
-    { id: "6662452", type: "tygmfy" },
-    { id: "6668451", type: "zygmfy" }
-];
+// 通用 JSON 加载器函数
+function loadJSON(url) {
+    return fetch(url).then(function(response) {
+        // 检查网络响应是否正常
+        if (!response.ok) {
+            throw new Error('网络响应异常，状态码：' + response.status);
+        }
+        return response.json(); // 返回 JSON 数据的解析结果
+    });
+}
 
 // 基础任务链接
 const baseTaskWebURL = "https://music.163.com/#/wiki/task-center/m/st/wiki/task-center/song/list?missionId=";
@@ -335,26 +334,66 @@ function createTaskLink(taskID, taskWebLinks, taskMobileLinks) {
 
 // 任务初始化绑定
 document.addEventListener("DOMContentLoaded", function() {
-    // 创建缓存对象
-    const taskLinkMap = {};
+    let tasksLoaded = false; // 默认任务未加载成功
 
-    // 一次性生成对应的链接类名并查询所有任务链接
-    tasks.forEach(task => {
-        const taskWebLinkClass = `.${task.type}TaskWebLink`; // 网页端任务链接的类名
-        const taskMobileLinkClass = `.${task.type}TaskMobileLink`; // 移动端任务链接的类名
+    // 提前缓存所有任务链接（性能优化）
+    const allTaskLinks = Array.from(document.querySelectorAll('[class*="TaskWebLink"], [class*="TaskMobileLink"]'));
+    const allTaskWebLinks = allTaskLinks.filter(link => link.className.includes("TaskWebLink"));
+    const allTaskMobileLinks = allTaskLinks.filter(link => link.className.includes("TaskMobileLink"));
 
-        // 查询并缓存对应类型的链接
-        const taskWebLinks = Array.from(document.querySelectorAll(taskWebLinkClass));
-        const taskMobileLinks = Array.from(document.querySelectorAll(taskMobileLinkClass));
+    // 选择任务区域的 container-body
+    const taskContainer = document.querySelector('#task ~ .container-body');
 
-        taskLinkMap[task.type] = { taskWebLinks, taskMobileLinks };
-    });
+    // 使用事件委托，在容器内统一监听任务链接点击事件
+    if (taskContainer) {
+        taskContainer.addEventListener("click", function(event) {
+            const link = event.target.closest("a");
+            if (link && allTaskLinks.includes(link) && !tasksLoaded) {
+                event.preventDefault(); // 阻止跳转
+                alert("任务配置未加载，请稍后重试！");
+            }
+        });
+    }
 
-    // 创建对应任务类型的链接
-    tasks.forEach(task => {
-        const { taskWebLinks, taskMobileLinks } = taskLinkMap[task.type];
-        createTaskLink(task.id, taskWebLinks, taskMobileLinks);
-    });
+    // 检查是否存在任务链接
+    if (allTaskLinks.length > 0) {
+        // 异步加载任务配置 JSON
+        loadJSON('/json/tasks-config.json')
+            .then(function(data) {
+                const tasks = data.tasks; // 从 data 中取出 tasks 数组
+
+                // 创建缓存对象
+                const taskLinkMap = {};
+
+                // 遍历每个任务类型，匹配并赋值对应链接
+                tasks.forEach(function(task) {
+                    const taskWebLinkClass = `${task.type}TaskWebLink`; // 网页端任务链接的类名
+                    const taskMobileLinkClass = `${task.type}TaskMobileLink`; // 移动端任务链接的类名
+
+                    // 筛选出当前任务类型对应的链接
+                    const taskWebLinks = allTaskWebLinks.filter(function(link) {
+                        return link.classList.contains(taskWebLinkClass);
+                    });
+                    const taskMobileLinks = allTaskMobileLinks.filter(function(link) {
+                        return link.classList.contains(taskMobileLinkClass);
+                    });
+
+                    // 缓存任务链接
+                    taskLinkMap[task.type] = { taskWebLinks, taskMobileLinks };
+
+                    // 创建任务链接
+                    createTaskLink(task.id, taskWebLinks, taskMobileLinks);
+                });
+
+                tasksLoaded = true; // 所有任务链接创建完毕，标记为加载成功
+            })
+            .catch(function(error) {
+                console.error("加载任务配置失败：", error);
+                tasksLoaded = false; // 如果发生错误，标记为加载失败
+            });
+    } else {
+        console.error("未找到任务链接元素（TaskWebLink 或 TaskMobileLink）！");
+    }
 });
 
 // 监听滚动事件以显示或隐藏回到顶部容器
@@ -384,9 +423,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 遍历每个 input 元素并为其添加鼠标移入事件
     inputElements.forEach(function(inputElement) {
-      inputElement.addEventListener('mouseover', function() {
-        inputElement.focus();
-      });
+        inputElement.addEventListener('mouseover', function() {
+            inputElement.focus();
+        });
     });
 });
 
@@ -486,21 +525,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // 显示加载中的消息
         loadingMessage.textContent = '审核进度加载中...';
 
-        // 异步加载JSON文件
-        fetch('/json/audit-status.json')
-            .then(response => {
-                // 检查网络响应是否正常
-                if (!response.ok) {
-                    throw new Error('网络响应异常');
-                }
-                return response.json(); // 返回JSON数据的解析结果
-            })
-            .then(data => {
+        // 异步加载审核进度 JSON
+        loadJSON('/json/audit-status.json')
+            .then(function(data) {
                 // 处理获取的JSON数据
                 const currentDate = new Date(data.last_updated); // 当前日期
 
                 // 遍历每个类别的日期，计算日期差异并设置颜色类名
-                const categoriesList = data.categories.map(item => {
+                const categoriesList = data.categories.map(function(item) {
                     const itemDate = new Date(item.date); // 类别的日期
                     const diffTime = currentDate.getTime() - itemDate.getTime(); // 毫秒差异
                     const diffDays = Math.floor(diffTime / (1000 * 3600 * 24)); // 转换为天数
@@ -527,14 +559,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 隐藏加载中的消息
                 loadingMessage.style.display = 'none';
             })
-            .catch(error => {
+            .catch(function(error) {
                 // 捕获并处理任何错误
-                console.error('获取JSON数据时出错:', error);
+                console.error('加载审核数据出错:', error);
                 // 在加载消息中显示错误信息
                 loadingMessage.textContent = '加载审核数据出错';
             });
     } else {
-        console.error('未找到元素'); // 元素未找到的错误处理
+        console.error('元素 #audit-status 或 #loading-message 不存在！'); // 元素未找到的错误处理
     }
 
     // 格式化日期函数
