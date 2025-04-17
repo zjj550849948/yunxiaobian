@@ -338,8 +338,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 提前缓存所有任务链接（性能优化）
     const allTaskLinks = Array.from(document.querySelectorAll('[class*="TaskWebLink"], [class*="TaskMobileLink"]'));
-    const allTaskWebLinks = allTaskLinks.filter(link => link.className.includes("TaskWebLink"));
-    const allTaskMobileLinks = allTaskLinks.filter(link => link.className.includes("TaskMobileLink"));
 
     // 选择任务区域的 container-body
     const taskContainer = document.querySelector('#task ~ .container-body');
@@ -361,27 +359,37 @@ document.addEventListener("DOMContentLoaded", function() {
         loadJSON('/json/tasks-config.json')
             .then(function(data) {
                 const tasks = data.tasks; // 从 data 中取出 tasks 数组
+                const taskLinkMap = {}; // 创建缓存对象
 
-                // 创建缓存对象
-                const taskLinkMap = {};
-
-                // 遍历每个任务类型，匹配并赋值对应链接
+                // 为每种任务类型创建缓存结构
                 tasks.forEach(function(task) {
-                    const taskWebLinkClass = `${task.type}TaskWebLink`; // 网页端任务链接的类名
-                    const taskMobileLinkClass = `${task.type}TaskMobileLink`; // 移动端任务链接的类名
+                    taskLinkMap[task.type] = {
+                        taskWebLinks: [],
+                        taskMobileLinks: []
+                    };
+                });
 
-                    // 筛选出当前任务类型对应的链接
-                    const taskWebLinks = allTaskWebLinks.filter(function(link) {
-                        return link.classList.contains(taskWebLinkClass);
-                    });
-                    const taskMobileLinks = allTaskMobileLinks.filter(function(link) {
-                        return link.classList.contains(taskMobileLinkClass);
-                    });
+                // 单次遍历所有链接，根据类名后缀精准分类归档
+                allTaskLinks.forEach(function(link) {
+                    const classList = link.classList;
 
-                    // 缓存任务链接
-                    taskLinkMap[task.type] = { taskWebLinks, taskMobileLinks };
+                    for (const taskLinkClass of classList) {
+                        if (taskLinkClass.endsWith("TaskWebLink")) {
+                            const type = taskLinkClass.replace("TaskWebLink", "");
+                            taskLinkMap[type] && taskLinkMap[type].taskWebLinks.push(link);
+                            break;// 精准匹配后终止，避免多余判断
+                        }
+                        if (taskLinkClass.endsWith("TaskMobileLink")) {
+                            const type = taskLinkClass.replace("TaskMobileLink", "");
+                            taskLinkMap[type] && taskLinkMap[type].taskMobileLinks.push(link);
+                            break;
+                        }
+                    }
+                });
 
-                    // 创建任务链接
+                // 创建任务链接
+                tasks.forEach(function(task) {
+                    const { taskWebLinks, taskMobileLinks } = taskLinkMap[task.type];
                     createTaskLink(task.id, taskWebLinks, taskMobileLinks);
                 });
 
