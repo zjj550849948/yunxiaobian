@@ -492,10 +492,9 @@ window.onload = function() {
         }
     }
 
-    // 找到所有的跳转链接并添加点击事件监听器
-    var links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(function(link) {
-        link.addEventListener('click', function(event) {
+    // 针对 navLinks 添加点击事件监听器
+    navLinks.forEach(function(navLink) {
+        navLink.addEventListener('click', function(event) {
             event.preventDefault(); // 阻止默认的点击事件
             var targetId = this.getAttribute('href').slice(1); // 获取目标元素的ID
             scrollToElement(targetId); // 调用滚动函数
@@ -551,8 +550,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         diffDays >= 15 ? 'red' :
                         'yellow';
 
-                    // 构造列表项的 HTML
-                    return `<li class="status-item ${colorClass}">${item.category} : ${item.date}</li>`;
+                    // 将类别名称拆分并用 <span> 包裹
+                    const categoryChars = item.category.split('').map(char => `<span class="char">${char}</span>`).join('');
+                    
+                    // 将日期拆分并用 <span> 包裹
+                    const dateChars = item.date.split('').map(char => `<span class="char">${char}</span>`).join('');
+
+                    // 构造列表项的 HTML，并使用内联样式传递字符数
+                    return `
+                        <li class="status-item ${colorClass}">
+                            <div class="status-category" style="--char-count: ${item.category.length};">${categoryChars}</div>
+                            <span class="colon">:</span>
+                            <div class="status-date" style="--char-count: ${item.date.length};">${dateChars}</div>
+                        </li>
+                    `;
                 }).join('');
 
                 // 构造完整的内容
