@@ -513,14 +513,19 @@ body {
     text-align: center;
     align-items: center;
     margin-bottom: 5px; /* 调整列表项之间的间距 */
-    font-size: 17px;
+    --font-size: 17px;
+    font-size: var(--font-size);
     font-weight: bold;
     border-radius: 4px;
     cursor:text;
 }
 
 /* 根据字符数自动创建等宽列 */
-.item-block .status-item .status-category,
+.item-block .status-item .status-category {
+    display: grid;
+    grid-template-columns: repeat(var(--char-count), var(--font-size)); /* 指定创建的宽度等于字体宽度 */
+}
+
 .item-block .status-item .status-date {
     display: grid;
     grid-template-columns: repeat(var(--char-count), 1fr);
