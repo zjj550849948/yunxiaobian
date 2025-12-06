@@ -566,9 +566,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                 }).join('');
 
+                // 标题仅数字（0-9）进入等宽 inline-grid，其它符号全部保持自然排列
+                function splitFormattedDateToHTML(formattedDate) {
+                    let htmlOutput = '';
+                    let digitBuffer = ''; // 缓存连续数字
+                    const flushDigitBufferAsGrid = () => {
+                        if (!digitBuffer) return;
+                        const digitCount = digitBuffer.length;
+                        htmlOutput += `<span class="status-updated" style="--char-count:${digitCount}">` +
+                               digitBuffer.split('').map(char => `<span class="char date-char">${char}</span>`).join('') +
+                               `</span>`;
+                        digitBuffer = '';
+                    };
+
+                    // 遍历 formattedDate 的每个字符
+                    for (const char of formattedDate) {
+                        if (/[0-9]/.test(char)) {
+                            // 数字进入 digitBuffer
+                            digitBuffer += char;
+                        } else {
+                            // 非数字（包括空格、冒号、“-”）全部自然 inline
+                            flushDigitBufferAsGrid();
+                            htmlOutput += `<span class="normal-char">${char}</span>`;
+                        }
+                    }
+                    flushDigitBufferAsGrid();
+                    return htmlOutput;
+                }
+
+                const formattedDate = formatDate(data.last_updated);
+                const formattedDateHTML = splitFormattedDateToHTML(formattedDate);
+
                 // 构造完整的内容
                 const content = `
-                    <span class="status-title">百科审核进度 更新时间 : ${formatDate(data.last_updated)}</span>
+                    <span class="status-title">百科审核进度 更新时间 : ${formattedDateHTML}</span>
                     <ul class="status-list">${categoriesList}</ul>
                 `;
 

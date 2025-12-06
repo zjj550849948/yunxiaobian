@@ -494,6 +494,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     padding-top: 8px;
+    cursor:text;
 }
 
 .item-block .status-list {
@@ -529,6 +530,12 @@ body {
 .item-block .status-item .status-date {
     display: grid;
     grid-template-columns: repeat(var(--char-count), 1fr);
+}
+
+.item-block .status-title .status-updated {
+    display: inline-grid;
+    grid-template-columns: repeat(var(--char-count), 1ch);
+    align-items: center;
 }
 
 /* 不同日期差异的颜色样式 */
