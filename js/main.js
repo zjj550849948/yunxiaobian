@@ -39,6 +39,12 @@ document.addEventListener("DOMContentLoaded", function() {
     initClearButton("addAlbumUserInput", "addAlbumLink", createAddAlbumLink);
     initClearButton("artistRepeatUserInput", "artistRepeatLink", createArtistRepeatLink);
     initClearButton("searchQuery", "searchLink", createSearchLink);
+
+    // 鼠标移动到输入框时自动聚焦
+    enableInputAutoFocus();
+
+    // 禁用数字输入框滚轮改变数值
+    disableNumberInputWheel();
 });
 
 // 歌曲编辑页面直达
@@ -426,7 +432,7 @@ document.addEventListener('touchend', function() {
 });
 
 // 鼠标移动到输入框时自动聚焦
-document.addEventListener("DOMContentLoaded", () => {
+function enableInputAutoFocus() {
     const inputElements = document.querySelectorAll('input');
 
     // 遍历每个 input 元素并为其添加鼠标移入事件
@@ -435,7 +441,22 @@ document.addEventListener("DOMContentLoaded", () => {
             inputElement.focus();
         });
     });
-});
+}
+
+// 禁用数字输入框滚轮改变数值
+function disableNumberInputWheel() {
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+
+    // 遍历每个数字输入框并为其添加鼠标滚轮事件
+    numberInputs.forEach(function(inputElement) {
+        inputElement.addEventListener('wheel', function() {
+            inputElement.readOnly = true; // 同步挂锁：在滚轮指令触发瞬间阻断数值变动
+            requestAnimationFrame(function() {
+                inputElement.readOnly = false; // 异步开锁：在下一帧重绘前恢复可编辑状态
+            });
+        }, { passive: true }); // passive: true 确保不影响页面滚动性能
+    });
+}
 
 // 导航栏跳转修正
 window.onload = function() {
