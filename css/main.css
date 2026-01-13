@@ -150,6 +150,10 @@ nav,
     top: 115px;
 }
 
+.search-select-wrapper {
+    position: relative;
+}
+
 /* 选择框样式 */
 .search-select {
     width: 80px;
@@ -199,7 +203,8 @@ nav,
 
 .search-type-box {
     position: absolute;
-    top: 44px;
+    top: 42px;
+    left: 0;
     width: 80px;
     background-color: #fff;
     border: 1px solid #1890ff;
@@ -207,6 +212,7 @@ nav,
     box-shadow: 0px 0px 0px 2px rgba(80, 160, 255, 0.253);
     z-index: 1;
     box-sizing: border-box;
+    contain: content;
     opacity: 0;
     visibility: hidden;
     transform: scaleY(0) translateY(-10px); /* 初始状态：缩小并在顶部 */

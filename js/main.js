@@ -125,9 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 点击触发模拟 label 行为，切换下拉框显示状态
     searchLabel.addEventListener('click', function() {
-        const rect = searchLabel.getBoundingClientRect(); // 获取选择框的位置
-        const pageXOffset = window.scrollX || document.documentElement.scrollLeft;
-
         // 切换 .show 类以控制显示或隐藏
         if (searchTypeBox.classList.contains('show')) {
             // 如果已经显示，则隐藏下拉框并恢复箭头
@@ -135,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
             searchLabel.classList.remove('open');  // 恢复箭头方向（向下）
         } else {
             // 如果没有显示，则显示下拉框并旋转箭头
-            searchTypeBox.style.left = `${rect.left + pageXOffset}px`;  // 设置下拉框的位置
             searchTypeBox.classList.add('show');  // 添加 .show 类，触发显示动画
             searchLabel.classList.add('open');  // 旋转箭头
             searchOptions[0].classList.add('selected'); // 添加选中样式
@@ -156,18 +152,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!searchTypeBox.contains(event.target) && !searchLabel.contains(event.target)) {
             searchTypeBox.classList.remove('show');  // 移除 .show 类，触发隐藏动画
             searchLabel.classList.remove('open');  // 恢复箭头方向
-        }
-    });
-
-    // 监听窗口缩放，动态调整下拉框的位置
-    window.addEventListener('resize', function() {
-        // 如果下拉框已经显示，重新计算位置
-        if (searchTypeBox.classList.contains('show')) {
-            const rect = searchLabel.getBoundingClientRect();
-            const pageXOffset = window.scrollX || document.documentElement.scrollLeft;
-
-            // 重新计算并设置下拉框的左侧位置
-            searchTypeBox.style.left = `${rect.left + pageXOffset}px`;
         }
     });
 
